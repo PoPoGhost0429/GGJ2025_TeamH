@@ -11,6 +11,7 @@ public class BubbleSystem : MonoBehaviour
     }
     private static BubbleSystem instance;
     public GameObject bubblePrefab;
+    public GameObject pearlPrefab;
     public static BubbleSystem Instance
     {
         get
@@ -28,23 +29,27 @@ public class BubbleSystem : MonoBehaviour
         }
     }
 
-    public void generateBubble(){
+    public void generateBubble(float x, float y, float scale){
         GameObject bubble = Instantiate(bubblePrefab);
+        bubble.transform.position = new Vector3(x, y, 0);
+        bubble.transform.localScale = new Vector3(scale, scale, 0);
         /*
         var:
-        followPlayerSpeed
         absorbSpeed
         absorbRatio
-        absorbMaxDis
-        gas
-        canAsborb
 
         func:
-        follow(PlayerPos)
         absorption()
+        float bubble.getChild(0).getChild(0).getGasValue()
         */
-
+        
     }
+    public void generatePearl(float x, float y, float scale){
+        GameObject pearl = Instantiate(pearlPrefab);
+        pearl.transform.position = new Vector3(x, y, 0);
+        pearl.transform.localScale = new Vector3(scale, scale, 0);
+    }
+
 
     private void Awake()
     {
@@ -60,13 +65,14 @@ public class BubbleSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        generateBubble();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        generateBubble(UnityEngine.Random.Range(-7.0f, 8.0f), -3.7f, 1.1f);
+        generatePearl(UnityEngine.Random.Range(-7.0f, 8.0f), 5f, 0);
     }
 
 }
