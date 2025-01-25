@@ -17,7 +17,6 @@ public class bubbleController : BubbleBase{
         if(isMax && gameObject.tag != "Pearl"){
             absorption(test);
         }
-        
     }
     public void absorption(Vector3 playPos){
         GetComponent<Rigidbody2D>().AddForce((playPos - transform.position) * followPlayerSpeed);
