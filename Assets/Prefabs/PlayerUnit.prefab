@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5132022662727712253}
   - component: {fileID: 7379558525750725180}
-  - component: {fileID: -2072252593234860283}
+  - component: {fileID: 6804206077321157090}
   - component: {fileID: 6839202244151347953}
   - component: {fileID: 7910326719596367200}
+  - component: {fileID: 9186936533888441951}
   m_Layer: 0
   m_Name: PlayerUnit
   m_TagString: Player
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 1416411087, guid: 596e16e4c079f494892a5f36ef7e96ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &-2072252593234860283
+--- !u!58 &6804206077321157090
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,7 +122,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
 --- !u!50 &6839202244151347953
 Rigidbody2D:
   serializedVersion: 4
@@ -161,3 +162,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa6629e1c363b59498c8c70e7001846f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  extraSpeed: 1
+--- !u!95 &9186936533888441951
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465527495034722625}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 15fbdd4fff375e342ae04bfa0c76e5f1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

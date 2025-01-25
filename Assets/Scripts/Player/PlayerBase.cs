@@ -22,17 +22,26 @@ public class PlayerBase
     private PlayerSystem playerSystem;
 
     private float rotationRadius = 2f;    // 當前旋轉半徑
-    private float targetRadius = 2f;      // 目標旋轉半徑
-    private float minRadius = 1f;         // 最小半徑
-    private float maxRadius = 3f;         // 最大半徑
+    private float targetRadius = 0.5f;      // 目標旋轉半徑
+    private float minRadius = 0.5f;         // 最小半徑
+    private float maxRadius = 2f;         // 最大半徑
+
+    private float extraMoveSpeed = 0f;
+
+    private float extraRadius = 0f;
+
+    private float extraRadiusSpeed = 0f;
+
+    private float dispersionRadius = 3f;
+
     private float radiusChangeSpeed = 1f; // 降低半徑變化速度
-    private float rotationSpeed = 1.5f;   // 降低旋轉速度
+    private float rotationSpeed = 3f;   // 降低旋轉速度
     private float currentAngle = 0f;      // 當前角度
     private Vector3 groupPosition;        // 群體位置
 
     private int airAmount;
 
-    public PlayerBase(PlayerInitData data)
+    public PlayerBase(int playerID, PlayerInitData data)
     {
         playerSystem = PlayerSystem.Instance;
         this.initData = data;
@@ -42,16 +51,36 @@ public class PlayerBase
         }
         
         groupPosition = GetUnitCenterPosition();
+
+        InputSystem.Instance.PlayerControllers[playerID].OnInputEvent += Move;
+    }
+
+    public bool CheckIsAlive(){
+        return unitList.Count > 0;
+    }
+
+    public int GetUnitAmount(){
+        return unitList.Count;
+    }
+
+    public void AddExtraMoveSpeed(bool spedUp){
+        extraMoveSpeed = spedUp ? 2f : -2f;
+    }
+
+    public void ClearExtraMoveSpeed(){
+        extraMoveSpeed = 0f;
     }
 
     public void Move(InputData inputData){
         // 更新群體位置
         groupPosition += (Vector3)inputData.moveDirection * initData.unitMoveSpeed * Time.deltaTime;
+        // groupPosition += (Vector3)inputData.moveDirection * initData.unitMoveSpeed * Time.deltaTime;
     }
 
     public void RotateUnits()
     {
-        rotationRadius = Mathf.Lerp(rotationRadius, targetRadius, radiusChangeSpeed * Time.deltaTime);
+        float finalRadius = targetRadius + extraRadius;
+        rotationRadius = Mathf.Lerp(rotationRadius, finalRadius, (radiusChangeSpeed + extraRadiusSpeed) * Time.deltaTime);
         currentAngle += rotationSpeed * Time.deltaTime;
         
         Vector3 centerPos = groupPosition;
@@ -70,7 +99,7 @@ public class PlayerBase
             Vector3 targetPosition = centerPos + offset;
             Vector2 moveDirection = ((Vector2)(targetPosition - unitList[i].transform.position));
             // 不需要 normalized，讓距離影響移動速度
-            unitList[i].Move(moveDirection, initData.unitMoveSpeed);
+            unitList[i].Move(moveDirection, initData.unitMoveSpeed + extraMoveSpeed);
         }
     }
 
@@ -114,6 +143,31 @@ public class PlayerBase
         if(airAmount >= initData.GenerateUnitAirAmount){
             GenerateUnit();
             airAmount = 0;
+        }
+    }
+
+    public void Dispersion()
+    {
+        extraRadius = dispersionRadius;
+        extraRadiusSpeed = 3f;
+        foreach(var unit in unitList){
+            unit.extraSpeed = 3f;
+        }
+    }
+
+    public void Polymerization()
+    {
+        extraRadius -= 0.5f;
+        extraRadiusSpeed -= 0.5f;
+        foreach(var unit in unitList){
+            unit.extraSpeed -= 0.4f;
+            unit.extraSpeed = Mathf.Clamp(unit.extraSpeed, 1f, 3f);
+        }
+        if(extraRadius < 0f){
+            extraRadius = 0f;
+        }
+        if(extraRadiusSpeed < 0f){
+            extraRadiusSpeed = 0f;
         }
     }
 
