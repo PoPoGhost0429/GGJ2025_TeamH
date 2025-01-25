@@ -32,7 +32,7 @@ public class BubbleSystem : MonoBehaviour
     public void generateBubble(float x, float y, float scale){
         GameObject bubble = Instantiate(bubblePrefab);
         bubble.transform.position = new Vector3(x, y, 0);
-        bubble.transform.localScale = new Vector3(scale, scale, 0);
+        bubble.GetComponent<bubbleController>().setMaxScale(scale);
         /*
         var:
         absorbSpeed
