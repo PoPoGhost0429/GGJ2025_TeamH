@@ -13,10 +13,6 @@ public class bubbleController : BubbleBase{
     protected override void Update(){
         base.Update();
         gas = transform.localScale.x;
-        
-        if(isMax && gameObject.tag != "Pearl"){
-            absorption(test);
-        }
     }
     public void absorption(Vector3 playPos){
         GetComponent<Rigidbody2D>().AddForce((playPos - transform.position) * followPlayerSpeed);
@@ -31,6 +27,11 @@ public class bubbleController : BubbleBase{
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == "Player" && gameObject.tag != "Pearl"){
             GetComponent<Rigidbody2D>().AddForce((other.transform.position - transform.position) * followPlayerSpeed);
+        }
+        if(other.gameObject.tag == "BubbleType1" || other.gameObject.tag == "BubbleType2"){
+            Collider2D bubble = other.gameObject.GetComponent<CircleCollider2D>();
+            Collider2D pearl = gameObject.GetComponent<CircleCollider2D>();
+            Physics2D.IgnoreCollision(bubble, pearl);
         }
     }
 }
