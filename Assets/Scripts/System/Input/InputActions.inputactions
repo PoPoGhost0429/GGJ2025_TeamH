@@ -28,7 +28,7 @@
                 {
                     "name": "",
                     "id": "042feab2-6cad-4e53-801f-8ae8499097a1",
-                    "path": "<Gamepad>/dpad",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Controller1;Controller2",
@@ -160,7 +160,7 @@
                 {
                     "name": "",
                     "id": "ecc573cc-5f6b-4b6b-b0d8-37100a412ed7",
-                    "path": "<Keyboard>/tab",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": ";KeyBoardLeft;KeyBoardRight",

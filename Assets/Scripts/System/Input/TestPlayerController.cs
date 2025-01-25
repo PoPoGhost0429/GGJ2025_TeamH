@@ -58,14 +58,19 @@ public class TestPlayerController : MonoBehaviour
         m_Player.SetMoveInput(moveDir);
     }
     
-    private void OnPause(InputAction.CallbackContext obj)
+    private void OnPause(InputAction.CallbackContext context)
     {
-        Debug.Log("Pause");
-        InputSystem.Instance.OnPlayerPause();
+        if (context.performed)
+        {
+            InputSystem.Instance.OnPlayerPause();
+        }
     }
     
-    private void OnResume(InputAction.CallbackContext obj)
+    private void OnResume(InputAction.CallbackContext context)
     {
-        InputSystem.Instance.OnPlayerResume();
+        if (context.performed)
+        {
+            InputSystem.Instance.OnPlayerResume();
+        }
     }
 }
