@@ -7,18 +7,26 @@ using UnityEngine;
 
 public class bubbleController : BubbleBase{
     // Update is called once per frame
-    [SerializeField] float followPlayerSpeed = 1f, absorbSpeed = 0.3f, absorbRatio = 0.8f;
+    public float followPlayerSpeed = 1f, absorbSpeed = 0.3f, absorbRatio = 0.8f, absorbMaxDis = 1f, gas=0;
+    //Vector3 test = new Vector3(0, 0, 0);
 
     protected override void Update(){
         base.Update();
+        gas = transform.localScale.x;
+        /*
+        if(isMax && gameObject.tag != "Pearl"){
+            absorption(test);
+        }
+        */
     }
 
-    void absorption(Vector3 playPos){
+    public void absorption(Vector3 playPos){
         GetComponent<Rigidbody2D>().AddForce((playPos - transform.position) * followPlayerSpeed);
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0.0f;
         transform.localScale -= new Vector3(absorbSpeed*absorbRatio, absorbSpeed*absorbRatio, 0);
-        if(transform.localScale.x < 0.1f){
-            Destroy(gameObject);
+        if(transform.localScale.x < 0.01f){
+            gas = 0;
+            gameObject.SetActive(false);
         }
     }
 }

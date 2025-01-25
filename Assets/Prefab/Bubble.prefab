@@ -169,3 +169,5 @@ MonoBehaviour:
   followPlayerSpeed: 1
   absorbSpeed: 0.001
   absorbRatio: 0.97
+  absorbMaxDis: 1
+  air: 0
