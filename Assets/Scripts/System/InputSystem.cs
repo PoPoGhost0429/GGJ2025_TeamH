@@ -46,10 +46,10 @@ public class InputSystem : MonoBehaviour
             return;
         }
         instance = this;
-        // DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
         
-        AddKeyBoardPlayer(2);
-        AddGamePadPlayer();
+        // AddKeyBoardPlayer(2);
+        // AddGamePadPlayer();
         PlayerControllers = FindObjectsOfType<TestPlayerController>();
     }
 
@@ -127,4 +127,41 @@ public class InputSystem : MonoBehaviour
                 break;
         }
     }
+    
+    public void OnPlayerPause()
+    {
+        _PauseMenu.SetActive(true);
+        SwitchInputMap(EInputType.UI);
+    }
+
+    public void OnPlayerResume()
+    {
+        _PauseMenu.SetActive(false);
+        SwitchInputMap(EInputType.GamePlay);
+    }
+
+    public void SwitchInputMap(EInputType inputType)
+    {
+        foreach (TestPlayerController input in m_PlayerInputs)
+        {
+            input.SetActionMap(inputType);
+        }
+    }
+    
+// #if UNITY_EDITOR
+//     private void OnEnable()
+//     {
+//         m_PlayerInputManager.onPlayerJoined += OnPlayerJoined;
+//     }
+//
+//     private void OnDisable()
+//     {
+//         m_PlayerInputManager.onPlayerJoined -= OnPlayerJoined;
+//     }
+//
+//     private void OnPlayerJoined(PlayerInput obj)
+//     {
+//         Debug.Log($"Index: {obj.playerIndex}");
+//     }
+// #endif
 }

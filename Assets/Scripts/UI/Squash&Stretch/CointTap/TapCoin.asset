@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db43479108b7214c8033d0f0740fa3f, type: 3}
+  m_Name: TapCoin
+  m_EditorClassIdentifier: 
+  AxisToAffect: 2
+  CanOverwritten: 1
+  PlayOnStart: 0
+  CanPlayEveryTime: 1
+  PlayPercentage: 100
+  Duration: 0.5
+  OriginScale: 1
+  MaxScale: 1.5
+  ResetScaleOrNot: 1
+  SquashStretchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 8.107266
+      outSlope: 8.107266
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.121822506
+      value: 0.98764753
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.22135818
+      value: 0.5244003
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.25006026
+      value: 0.2494007
+      inSlope: -0.54862183
+      outSlope: -0.54862183
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.332561
+      outSlope: -0.332561
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  CanReverseAfterPlaying: 0
+  CanLoop: 0
+  LoopingDelay: 0.5

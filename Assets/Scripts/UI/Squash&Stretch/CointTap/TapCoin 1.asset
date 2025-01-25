@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db43479108b7214c8033d0f0740fa3f, type: 3}
+  m_Name: TapCoin 1
+  m_EditorClassIdentifier: 
+  AxisToAffect: 1
+  CanOverwritten: 1
+  PlayOnStart: 0
+  PlayOnEnable: 0
+  CanPlayEveryTime: 1
+  PlayPercentage: 100
+  Duration: 0.5
+  OriginScale: 1
+  MaxScale: 1.5
+  ResetScaleOrNot: 1
+  SquashStretchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.0023584962
+      inSlope: 2.2169812
+      outSlope: 2.2169812
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.45
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08332597
+      outWeight: 0.08560235
+    - serializedVersion: 3
+      time: 0.9979248
+      value: 0.002357483
+      inSlope: -1.8207654
+      outSlope: -1.8207654
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  CanReverseAfterPlaying: 0
+  CanLoop: 0
+  LoopingDelay: 0.5
