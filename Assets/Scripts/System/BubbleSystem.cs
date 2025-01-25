@@ -25,6 +25,20 @@ public class BubbleSystem : MonoBehaviour
 
     public void generateBubble(){
         GameObject bubble = Instantiate(bubblePrefab);
+        /*
+        var:
+        followPlayerSpeed
+        absorbSpeed
+        absorbRatio
+        absorbMaxDis
+        gas
+        canAsborb
+
+        func:
+        follow(PlayerPos)
+        absorption()
+        */
+
     }
 
     private void Awake()
@@ -41,12 +55,13 @@ public class BubbleSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        generateBubble();
     }
 
     // Update is called once per frame
     void Update()
     {
-        generateBubble();
+        
     }
+
 }
