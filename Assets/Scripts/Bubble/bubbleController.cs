@@ -10,7 +10,7 @@ public class bubbleController : BubbleBase{
     public float absorbSpeed = 0.3f, absorbRatio = 0.8f, maxGas=100f, Nowgas = 0;
     public bool canAsborb = false;
     protected override void Start(){
-        transform.position = new Vector3(UnityEngine.Random.Range(-7.0f, 8.0f), -3.7f, 0);
+        //transform.position = new Vector3(UnityEngine.Random.Range(-7.0f, 8.0f), -3.7f, 0);
         Transform child = transform.GetChild(0);
         child.gameObject.tag = "BubbleType1";
         gameObject.tag = "BubbleType2";
