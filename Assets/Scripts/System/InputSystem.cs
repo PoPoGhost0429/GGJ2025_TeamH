@@ -1,10 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public struct InputData
 {
     public Vector2 moveDirection;
+}
+
+public enum EInputSource
+{
+    KeyBoardLeft = 0,
+    KKeyboardRight = 1,
+    Controller1 = 2,
+    Controller2 = 3,
 }
 
 public class InputSystem : MonoBehaviour
@@ -26,7 +37,15 @@ public class InputSystem : MonoBehaviour
             return instance;
         }
     }
+    
+    [SerializeField] private GameObject _PauseMenu;
+    
+    private PlayerInputManager m_PlayerInputManager;
 
+    [SerializeField] private GameObject _PlayerPrefab;
+    
+    private TestPlayerController[] m_PlayerInputs = new TestPlayerController[4];
+    
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -36,17 +55,100 @@ public class InputSystem : MonoBehaviour
         }
         instance = this;
         // DontDestroyOnLoad(gameObject);
+        
+        m_PlayerInputManager = GetComponent<PlayerInputManager>();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        AddKeyBoardPlayer(2);
+        AddGamePadPlayer();
+
+        m_PlayerInputs = FindObjectsOfType<TestPlayerController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddKeyBoardPlayer(int amount)
     {
+        PlayerInput.Instantiate(_PlayerPrefab, controlScheme: "KeyboardLeft", pairWithDevice: Keyboard.current);
         
+        if (amount == 2)
+        {
+            PlayerInput.Instantiate(_PlayerPrefab, controlScheme: "KeyboardRight", pairWithDevice: Keyboard.current);
+        }
     }
+
+    public void AddGamePadPlayer()
+    {
+        int gamepadCount = Gamepad.all.Count;
+        switch (gamepadCount)
+        {
+            case >= 2:
+                JoinPlayer(EInputSource.Controller1, _PlayerPrefab);
+                JoinPlayer(EInputSource.Controller2, _PlayerPrefab);
+                break;
+            case 1:
+                JoinPlayer(EInputSource.Controller1, _PlayerPrefab);
+                break;
+        }
+    }
+
+    public void JoinPlayer(EInputSource source, GameObject playerPrefab)
+    {
+        switch (source)
+        {
+            case EInputSource.KeyBoardLeft:
+                PlayerInput.Instantiate(playerPrefab,
+                    controlScheme: "KeyboardLeft", pairWithDevice: Keyboard.current);
+                break;
+            case EInputSource.KKeyboardRight:
+                PlayerInput.Instantiate(playerPrefab,
+                    controlScheme: "KeyboardRight", pairWithDevice: Keyboard.current);
+                break;
+            case EInputSource.Controller1:
+                PlayerInput.Instantiate(playerPrefab,
+                    controlScheme: "Controller1", pairWithDevice: Gamepad.all[0]);
+                break;
+            case EInputSource.Controller2:
+                PlayerInput.Instantiate(playerPrefab,
+                    controlScheme: "Controller2", pairWithDevice: Gamepad.all[1]);
+                break;
+        }
+    }
+    
+    public void OnPlayerPause()
+    {
+        _PauseMenu.SetActive(true);
+        // switch action map 
+        foreach (TestPlayerController input in m_PlayerInputs)
+        {
+            input.SetActionMap(EInputType.UI);
+        }
+    }
+
+    public void OnPlayerResume()
+    {
+        _PauseMenu.SetActive(false);
+        // switch action map
+        foreach (TestPlayerController input in m_PlayerInputs)
+        {
+            input.SetActionMap(EInputType.GamePlay);
+        }
+    }
+    
+#if UNITY_EDITOR
+    private void OnEnable()
+    {
+        m_PlayerInputManager.onPlayerJoined += OnPlayerJoined;
+    }
+
+    private void OnDisable()
+    {
+        m_PlayerInputManager.onPlayerJoined -= OnPlayerJoined;
+    }
+
+    private void OnPlayerJoined(PlayerInput obj)
+    {
+        Debug.Log($"Index: {obj.playerIndex}");
+    }
+#endif
 }
