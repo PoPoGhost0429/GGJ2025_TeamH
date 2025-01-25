@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _PauseMenu: {fileID: 1059213798}
-  _PlayerPrefab: {fileID: 7838803209998400611, guid: 32fc35bfa46ae1241ac3d9613be446df, type: 3}
+  _PlayerPrefab: {fileID: 8901276954035580428, guid: 0c41e6bf30231f547b11b647d2e1df09, type: 3}
 --- !u!114 &727494605
 MonoBehaviour:
   m_ObjectHideFlags: 0
