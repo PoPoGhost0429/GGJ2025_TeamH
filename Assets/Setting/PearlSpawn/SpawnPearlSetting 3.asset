@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SpawnPearlSetting 3
   m_EditorClassIdentifier: 
   index: 3
-  spawnDuration: 1
+  spawnDuration: 18
   bubbleSize: 1

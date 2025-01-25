@@ -40,7 +40,7 @@ public class GameSystem : MonoBehaviour
     private GameState gameState = default;
     private List<bool> playersAlive;
     private int playerCount;
-
+    private float bubbleMaxHeight = 20;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -134,7 +134,7 @@ public class GameSystem : MonoBehaviour
             Vector2 position = spawnBubble.CalculateSpawnPosition(setting.index);
             // GameObject circle = Instantiate(bubblePrefab, position, Quaternion.identity);
             // circle.transform.localScale = new Vector3(setting.bubbleSize, setting.bubbleSize, 1);
-            // BubbleSystem.Instance.GenerateBubble(BubbleSystem.BubbleType.Bubble, position, setting.bubbleSize);
+            BubbleSystem.Instance.generateBubble(position.x, position.y, setting.bubbleSize, bubbleMaxHeight);
         }
     }
 
@@ -146,7 +146,7 @@ public class GameSystem : MonoBehaviour
             Vector2 position = spawnPearl.CalculateSpawnPosition(setting.index);
             // GameObject circle = Instantiate(bubblePrefab, position, Quaternion.identity);
             // circle.transform.localScale = new Vector3(setting.bubbleSize, setting.bubbleSize, 1);
-            // BubbleSystem.Instance.GenerateBubble(BubbleSystem.BubbleType.Pearl, position, setting.bubbleSize);
+            BubbleSystem.Instance.generatePearl(position.x, position.y, setting.bubbleSize);
         }
     }
 }

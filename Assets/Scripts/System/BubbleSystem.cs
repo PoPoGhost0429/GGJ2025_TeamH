@@ -72,7 +72,7 @@ public class BubbleSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        generateBubble(UnityEngine.Random.Range(-7.0f, 8.0f), -3.7f, 1.0f, 50f);
+        // generateBubble(UnityEngine.Random.Range(-7.0f, 8.0f), -3.7f, 1.0f, 50f);
         //generatePearl(UnityEngine.Random.Range(-7.0f, 8.0f), 5f, 0);
     }
 

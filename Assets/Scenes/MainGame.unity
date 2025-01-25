@@ -198,7 +198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aac0bd5b96a51a4da1fa10010d00b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bubblePrefab: {fileID: 1580973474350464657, guid: d6bb528145231b34bba2206204cb5034, type: 3}
+  bubblePrefab: {fileID: 7803734106067992000, guid: 5aa26e398a1a28543b4c15369ce73e19, type: 3}
+  pearlPrefab: {fileID: 2609588207809762118, guid: 728f5966dd24af4408679be4dd6ab8aa, type: 3}
 --- !u!1 &58456551
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,7 +486,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5245282, g: 0.44114813, b: 0.18506938, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

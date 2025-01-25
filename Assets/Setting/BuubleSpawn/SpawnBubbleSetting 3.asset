@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SpawnBubbleSetting 3
   m_EditorClassIdentifier: 
   index: 3
-  spawnDuration: 1
+  spawnDuration: 3
   bubbleSize: 1
