@@ -5,6 +5,7 @@ using UnityEngine;
 public class BubbleSystem : MonoBehaviour
 {
     private static BubbleSystem instance;
+    public GameObject bubblePrefab;
     public static BubbleSystem Instance
     {
         get
@@ -20,6 +21,10 @@ public class BubbleSystem : MonoBehaviour
             }
             return instance;
         }
+    }
+
+    public void generateBubble(){
+        GameObject bubble = Instantiate(bubblePrefab);
     }
 
     private void Awake()
