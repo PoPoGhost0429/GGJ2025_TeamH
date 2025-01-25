@@ -18,6 +18,7 @@ public class BubbleBase : MonoBehaviour{
             transform.position = new Vector3(UnityEngine.Random.Range(-7.0f, 8.0f), 5f, 0);
             gameObject.GetComponent<Rigidbody2D>().gravityScale = 0.5f;
             gameObject.GetComponent<Rigidbody2D>().mass = 1.2f;
+            gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
             gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 1.0f);
         } else if (randomInt < 70){
             gameObject.tag = "BubbleType1";

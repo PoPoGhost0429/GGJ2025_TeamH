@@ -47,6 +47,6 @@ public class BubbleSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //generateBubble();
+        generateBubble();
     }
 }
