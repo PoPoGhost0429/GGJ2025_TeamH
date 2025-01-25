@@ -7,6 +7,10 @@ public class PlayerSystem : MonoBehaviour
     private static PlayerSystem instance;
 
     private List<PlayerBase> playerList = new List<PlayerBase>();
+
+    [SerializeField] private GameObject playerUnitPrefab;
+    private ObjectPoolSystem playerUnitPool;
+    [SerializeField] private PlayerData playerData;
     public static PlayerSystem Instance
     {
         get
@@ -35,6 +39,45 @@ public class PlayerSystem : MonoBehaviour
         // DontDestroyOnLoad(gameObject);
     }
 
+    private void Start(){
+        
+        GameObject poolGO = new GameObject("PlayerUnitPool");
+        playerUnitPool = poolGO.AddComponent<ObjectPoolSystem>();
+        playerUnitPool.CreatePool(playerUnitPrefab, 40);
+
+        InvokeRepeating("ChangeUnitRadius", 0, 1);
+    }
+
+    private void Update(){
+        if(Input.GetKeyDown(KeyCode.Space)){
+            GeneratePlayer(1);
+        }
+
+        if(Input.GetKeyDown(KeyCode.R)){
+            foreach(var player in playerList){
+                player.GenerateUnit();
+            }
+        }
+
+        // 獲取輸入軸的值
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        
+        // 創建移動方向向量
+        Vector2 moveDirection = new Vector2(horizontal, vertical).normalized;
+        
+        // 創建輸入數據
+        InputData inputData = new InputData{
+            moveDirection = moveDirection
+        };
+
+        // 更新所有玩家的移動
+        foreach(var player in playerList) {
+            player.RotateUnits();
+            player.Move(inputData);
+        }
+    }
+
     // 取得指定編號玩家
     public PlayerBase GetPlayer(int playerIndex)
     {
@@ -45,9 +88,23 @@ public class PlayerSystem : MonoBehaviour
     public void GeneratePlayer(int playerCount)
     {
         for (int i = 0; i < playerCount; i++)
-        {
-            PlayerBase player = new PlayerBase(new PlayerInitData());
+        {            
+            PlayerBase player = new PlayerBase(playerData.playerInitData);
             playerList.Add(player);
+        }
+    }
+
+    public GameObject GenerateUnit(Vector3 position){
+        return playerUnitPool.GetFromPool(playerUnitPrefab.name, position, Quaternion.identity);
+    }
+
+    public void ReturnUnit(GameObject unit){
+        playerUnitPool.ReturnToPool(unit);
+    }
+
+    private void ChangeUnitRadius(){
+        foreach(var player in playerList){
+            player.ExpandRadius(Random.Range(-1f, 1f));
         }
     }
 }
