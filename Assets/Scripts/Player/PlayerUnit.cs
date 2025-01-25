@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class PlayerUnit : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private PlayerBase playerBase;
+    private Rigidbody2D rb;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   public PlayerUnit(PlayerBase playerBase)
+   {
+        this.playerBase = playerBase;
+   }
+
+   private void Start(){
+        rb = GetComponent<Rigidbody2D>();
+   }
+
+   public void Move(Vector3 moveDirection, float moveSpeed){
+        if(rb == null){
+            rb = GetComponent<Rigidbody2D>();
+        }
+        rb.velocity = moveDirection * moveSpeed;
+   }    
 }
