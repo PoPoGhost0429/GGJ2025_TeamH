@@ -13,14 +13,14 @@ public class bubbleController : BubbleBase{
     protected override void Update(){
         base.Update();
         gas = transform.localScale.x;
-        /*
+        
         if(isMax && gameObject.tag != "Pearl"){
             absorption(test);
         }
-        */
+        
     }
-
     public void absorption(Vector3 playPos){
+        GetComponent<Rigidbody2D>().AddForce((playPos - transform.position) * followPlayerSpeed);
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0.0f;
         transform.localScale -= new Vector3(absorbSpeed*absorbRatio, absorbSpeed*absorbRatio, 0);
         if(transform.localScale.x < 0.01f){

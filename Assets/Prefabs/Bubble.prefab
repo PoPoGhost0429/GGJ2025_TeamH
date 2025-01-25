@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.01, y: -0.02, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -166,8 +166,8 @@ MonoBehaviour:
   maxHeight: 50
   maxScale: 1
   isMax: 0
-  followPlayerSpeed: 1
+  followPlayerSpeed: 0.5
   absorbSpeed: 0.001
   absorbRatio: 0.97
   absorbMaxDis: 1
-  air: 0
+  gas: 0
