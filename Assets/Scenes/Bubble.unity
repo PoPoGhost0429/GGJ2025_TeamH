@@ -131,7 +131,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7980730}
-  - component: {fileID: 7980729}
   - component: {fileID: 7980731}
   m_Layer: 0
   m_Name: GameSystem
@@ -140,18 +139,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &7980729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7980728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5724e2653e28cb14b875d65eea612d85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &7980730
 Transform:
   m_ObjectHideFlags: 0
@@ -388,7 +375,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -412,7 +399,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778628322}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -431,24 +418,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &998735111 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1763720378191855310, guid: 5aa26e398a1a28543b4c15369ce73e19, type: 3}
-  m_PrefabInstance: {fileID: 8568428387295166434}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &998735114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 998735111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 724730f22a48aaa4d881bd3d00c080ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followPlayerSpeed: 1
 --- !u!1 &1291629730
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +493,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -682,7 +651,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -970,7 +939,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1165,10 +1134,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1763720378191855310, guid: 5aa26e398a1a28543b4c15369ce73e19, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 998735114}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5aa26e398a1a28543b4c15369ce73e19, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
