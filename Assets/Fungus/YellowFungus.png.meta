@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 261784a057215a24ab674710026bc77b
+guid: f771fe9c6de6bfb4197c2efad53cbafd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spritesheet (2)_0
+      name: YellowFungus_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bcfd5db1a96572c408e78e206f6e005a
-      internalID: 179916651
+      spriteID: ff36cac50a01a7f469c41c246149738f
+      internalID: 1574262459
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet (2)_1
+      name: YellowFungus_1
       rect:
         serializedVersion: 2
-        x: 256
+        x: 64
         y: 0
-        width: 256
-        height: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d90180e9aac2a74fbfd215d60f17634
-      internalID: 2102783650
+      spriteID: b86116c1cc113d64c8d1e0f9f3af1a95
+      internalID: 1018014160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet (2)_2
+      name: YellowFungus_2
       rect:
         serializedVersion: 2
-        x: 512
+        x: 128
         y: 0
-        width: 256
-        height: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b2559788c9fef847af05b468321eab6
-      internalID: -1058614746
+      spriteID: 6cf143375e9a6c846982e5ade85f92a9
+      internalID: 1841760427
       vertices: []
       indices: 
       edges: []
@@ -170,9 +170,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spritesheet (2)_0: 179916651
-      spritesheet (2)_1: 2102783650
-      spritesheet (2)_2: -1058614746
+      YellowFungus_0: 1574262459
+      YellowFungus_1: 1018014160
+      YellowFungus_2: 1841760427
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

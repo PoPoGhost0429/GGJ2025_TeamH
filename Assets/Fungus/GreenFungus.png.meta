@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 60aaa04b84791e54894af0b928064dde
+guid: bb5697da7aff44c42be8a666ee4667a8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spritesheet (1)_0
+      name: spritesheet (6)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea1b7f25a4b7aba4790bdea56da89410
-      internalID: -52179351
+      spriteID: 60b5cbf5f7d8e1b4c81c98b81f37dce6
+      internalID: 39275468
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet (1)_1
+      name: spritesheet (6)_1
       rect:
         serializedVersion: 2
-        x: 256
+        x: 64
         y: 0
-        width: 256
-        height: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 382cda070d14aaa43bb6740f9b7e45c9
-      internalID: -1883778335
+      spriteID: 42acf009c87ea6f448e46074876f5a9b
+      internalID: 521777332
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet (1)_2
+      name: spritesheet (6)_2
       rect:
         serializedVersion: 2
-        x: 512
+        x: 128
         y: 0
-        width: 256
-        height: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0606f6bfbf4bdbc4dbc39dfa197acc91
-      internalID: 363679595
+      spriteID: be306307ff6becc43a3512ac6ae69a29
+      internalID: -1878720143
       vertices: []
       indices: 
       edges: []
@@ -170,9 +170,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spritesheet (1)_0: -52179351
-      spritesheet (1)_1: -1883778335
-      spritesheet (1)_2: 363679595
+      spritesheet (6)_0: 39275468
+      spritesheet (6)_1: 521777332
+      spritesheet (6)_2: -1878720143
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
