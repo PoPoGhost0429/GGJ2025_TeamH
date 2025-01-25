@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a06c5063e13a5641b5348ca693b4a7c, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  animatorControllers:
+  - {fileID: 9100000, guid: 0139ed53add399e46a8fa0c86d06e97f, type: 2}
+  - {fileID: 9100000, guid: 3c2bf226ca303d849a574dba6bae34c0, type: 2}
+  - {fileID: 9100000, guid: 6f202795ba753124887e7d203e5bbb2c, type: 2}
+  - {fileID: 9100000, guid: 04a290e4c7d54dd4b8f1660d24ef0520, type: 2}
   playerInitData:
     unitAmount: 5
     unitMoveSpeed: 10
-    unitScale: 1
+    unitScale: 2
     unitGenerageRange: 3
     GenerateUnitAirAmount: 10

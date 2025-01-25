@@ -39,8 +39,7 @@ public class PlayerSystem : MonoBehaviour
         // DontDestroyOnLoad(gameObject);
     }
 
-    private void Start(){
-        
+    public void InitPlayerSystem(){
         GameObject poolGO = new GameObject("PlayerUnitPool");
         playerUnitPool = poolGO.AddComponent<ObjectPoolSystem>();
         playerUnitPool.CreatePool(playerUnitPrefab, 40);
@@ -49,10 +48,6 @@ public class PlayerSystem : MonoBehaviour
     }
 
     private void Update(){
-        if(Input.GetKeyDown(KeyCode.Space)){
-            GeneratePlayer(1);
-        }
-
         if(Input.GetKeyDown(KeyCode.R)){
             foreach(var player in playerList){
                 player.GenerateUnit();
@@ -72,19 +67,6 @@ public class PlayerSystem : MonoBehaviour
         }
 
         // 更新所有玩家的移動
-         // 獲取輸入軸的值
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        
-        // 創建移動方向向量
-        Vector2 moveDirection = new Vector2(horizontal, vertical).normalized;
-        
-        // 創建輸入數據
-        InputData inputData = new InputData{
-            moveDirection = moveDirection
-        };
-
-        // 更新所有玩家的移動
         foreach(var player in playerList) {
             player.RotateUnits();
         }
@@ -101,7 +83,7 @@ public class PlayerSystem : MonoBehaviour
     {
         for (int i = 0; i < playerCount; i++)
         {            
-            PlayerBase player = new PlayerBase(i,playerData.playerInitData);
+            PlayerBase player = new PlayerBase(i,playerData.playerInitData, playerData.animatorControllers[i], new Vector3(0,0,0));
             playerList.Add(player);
         }
     }

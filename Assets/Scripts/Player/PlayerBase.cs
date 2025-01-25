@@ -15,6 +15,7 @@ public struct PlayerInitData
     public int GenerateUnitAirAmount;
 }
 
+[RequireComponent(typeof(Animator))]
 public class PlayerBase
 {
     private PlayerInitData initData;
@@ -22,9 +23,9 @@ public class PlayerBase
     private PlayerSystem playerSystem;
 
     private float rotationRadius = 2f;    // 當前旋轉半徑
-    private float targetRadius = 0.5f;      // 目標旋轉半徑
-    private float minRadius = 0.5f;         // 最小半徑
-    private float maxRadius = 2f;         // 最大半徑
+    private float targetRadius = 1f;      // 目標旋轉半徑
+    private float minRadius = 1f;         // 最小半徑
+    private float maxRadius = 3f;         // 最大半徑
 
     private float extraMoveSpeed = 0f;
 
@@ -39,14 +40,20 @@ public class PlayerBase
     private float currentAngle = 0f;      // 當前角度
     private Vector3 groupPosition;        // 群體位置
 
+    private Vector3 startPosition;
+
+    private RuntimeAnimatorController animatorController;
+
     private int airAmount;
 
     private InputData inputData;
 
-    public PlayerBase(int playerID, PlayerInitData data)
+    public PlayerBase(int playerID, PlayerInitData data, RuntimeAnimatorController animatorController, Vector3 position)
     {
         playerSystem = PlayerSystem.Instance;
         this.initData = data;
+        this.startPosition = position;
+        this.animatorController = animatorController;
         for (int i = 0; i < initData.unitAmount; i++)
         {
             GenerateUnit();
@@ -78,7 +85,7 @@ public class PlayerBase
         this.inputData = inputData;
         // groupPosition += (Vector3)inputData.moveDirection * initData.unitMoveSpeed * Time.deltaTime;
     }
-    
+
     public void RotateUnits()
     {
         groupPosition += (Vector3)inputData.moveDirection * initData.unitMoveSpeed * Time.deltaTime;
@@ -112,6 +119,7 @@ public class PlayerBase
         unit.transform.localScale = Vector3.one * initData.unitScale;
         PlayerUnit playerUnit = unit.GetComponent<PlayerUnit>();
         playerUnit.SetPlayerBase(this);
+        playerUnit.GetComponent<Animator>().runtimeAnimatorController = animatorController;
         unitList.Add(playerUnit);
     }
 
@@ -126,7 +134,7 @@ public class PlayerBase
         {
             return (centerPosition / unitList.Count) - groupPosition;
         }
-        return Vector3.zero;
+        return startPosition;
     }
 
     // 設置目標半徑

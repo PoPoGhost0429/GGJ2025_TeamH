@@ -71,10 +71,11 @@ public class GameSystem : MonoBehaviour
     public void InitGame()
     {
         // Get player count input from UI
-        playerCount = 4;
+        playerCount = 2;
         playersAlive = new List<bool>(playerCount);
         for (int i = 0; i < playerCount; i++)
             playersAlive.Add(true);
+        PlayerSystem.Instance.InitPlayerSystem();
         PlayerSystem.Instance.GeneratePlayer(playerCount);
 
         gameState = GameState.Gaming;
@@ -133,7 +134,7 @@ public class GameSystem : MonoBehaviour
             Vector2 position = spawnBubble.CalculateSpawnPosition(setting.index);
             // GameObject circle = Instantiate(bubblePrefab, position, Quaternion.identity);
             // circle.transform.localScale = new Vector3(setting.bubbleSize, setting.bubbleSize, 1);
-            BubbleSystem.Instance.GenerateBubble(BubbleSystem.BubbleType.Bubble, position, setting.bubbleSize);
+            // BubbleSystem.Instance.GenerateBubble(BubbleSystem.BubbleType.Bubble, position, setting.bubbleSize);
         }
     }
 
@@ -145,7 +146,7 @@ public class GameSystem : MonoBehaviour
             Vector2 position = spawnPearl.CalculateSpawnPosition(setting.index);
             // GameObject circle = Instantiate(bubblePrefab, position, Quaternion.identity);
             // circle.transform.localScale = new Vector3(setting.bubbleSize, setting.bubbleSize, 1);
-            BubbleSystem.Instance.GenerateBubble(BubbleSystem.BubbleType.Pearl, position, setting.bubbleSize);
+            // BubbleSystem.Instance.GenerateBubble(BubbleSystem.BubbleType.Pearl, position, setting.bubbleSize);
         }
     }
 }

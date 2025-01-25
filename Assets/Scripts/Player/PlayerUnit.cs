@@ -11,8 +11,6 @@ public class PlayerUnit : MonoBehaviour
     
     public float extraSpeed = 1f;
 
-
-
     private List<bubbleController> bubbleList = new List<bubbleController>();
 
    private void Start(){
@@ -36,19 +34,17 @@ public class PlayerUnit : MonoBehaviour
    }
 
    private void OnCollisionEnter2D(Collision2D other) {
-
-        if(!other.gameObject.CompareTag("Player")){
-            if(other.gameObject.CompareTag("BubbleType1")){
+        
+        if(other.gameObject.CompareTag("BubbleType1")){
                 bubbleController bubble = other.gameObject.GetComponent<bubbleController>();
                 // bubble.absorption();
                 playerBase.AddExtraMoveSpeed(true);
                 Invoke("CancelExtraMoveSpeed", 1);
                 CancelInvoke("GetAir");
             }
-            else{
-                playerBase.ReturnUnit(this);
-                CancelInvoke("GetAir");
-            }
+        if(other.gameObject.CompareTag("Pearl")){
+            playerBase.ReturnUnit(this);
+            CancelInvoke("GetAir");
         }
    }
 
