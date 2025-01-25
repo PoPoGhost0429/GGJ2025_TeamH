@@ -15,6 +15,9 @@ public class PlayerUnit : MonoBehaviour
 
    private void Start(){
         rb = GetComponent<Rigidbody2D>();
+
+        
+        InvokeRepeating("GetAir", 0, 0.5f);
    }
 
    public void SetPlayerBase(PlayerBase playerBase){
@@ -34,24 +37,28 @@ public class PlayerUnit : MonoBehaviour
    }
 
    private void OnCollisionEnter2D(Collision2D other) {
-        
-        if(other.gameObject.CompareTag("BubbleType1")){
-                bubbleController bubble = other.gameObject.GetComponent<bubbleController>();
-                BubbleTrigger bubbleTrigger = other.transform.GetChild(0).GetChild(0).GetComponent<BubbleTrigger>();
-                bubbleList.Remove(bubbleTrigger);
+        // Debug.Log(other.gameObject.tag);
+        if(other.gameObject.CompareTag("BubbleType2")){
+                Debug.Log(other.gameObject.name);
+                // bubbleController bubble = other.gameObject.GetComponent<bubbleController>();
+                BubbleTrigger bubbleTrigger = other.transform.GetChild(0).GetComponent<BubbleTrigger>();
+                playerBase.AddAir((int)bubbleTrigger.getGasValue());
+                // bubbleList.Remove(bubbleTrigger);
                 // bubble.absorption();
                 playerBase.AddExtraMoveSpeed(true);
                 Invoke("CancelExtraMoveSpeed", 1);
-                CancelInvoke("GetAir");
             }
         if(other.gameObject.CompareTag("Pearl")){
             playerBase.ReturnUnit(this);
-            CancelInvoke("GetAir");
         }
    }
 
    private void GetAir(){
-        playerBase.AddAir();
+        if(bubbleList.Count > 0){
+            foreach(var bubble in bubbleList){
+                playerBase.AddAir((int)bubble.getGasValue());
+            }
+        }
    }
 
    private void CancelExtraMoveSpeed(){
@@ -62,7 +69,6 @@ public class PlayerUnit : MonoBehaviour
         if(other.gameObject.CompareTag("BubbleType2")){
             BubbleTrigger bubbleTrigger = other.gameObject.GetComponent<BubbleTrigger>();
             bubbleList.Add(bubbleTrigger);
-            InvokeRepeating("GetAir", 0, 0.5f);
         }
    }
 
@@ -70,7 +76,6 @@ public class PlayerUnit : MonoBehaviour
         if(other.gameObject.CompareTag("BubbleType2")){
             BubbleTrigger bubbleTrigger = other.gameObject.GetComponent<BubbleTrigger>();
             bubbleList.Remove(bubbleTrigger);
-            CancelInvoke("GetAir");
         }
    }
 }

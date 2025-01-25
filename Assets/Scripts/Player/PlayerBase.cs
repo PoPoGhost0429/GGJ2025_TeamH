@@ -150,6 +150,7 @@ public class PlayerBase
     }
 
     public void AddAir(int amount = 1){
+        Debug.Log($"AddAir: {amount}");
         airAmount += amount;
         if(airAmount >= initData.GenerateUnitAirAmount){
             GenerateUnit();
