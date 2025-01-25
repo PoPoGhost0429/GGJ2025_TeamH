@@ -11,7 +11,7 @@ public class PlayerUnit : MonoBehaviour
     
     public float extraSpeed = 1f;
 
-    private List<bubbleController> bubbleList = new List<bubbleController>();
+    private List<BubbleTrigger> bubbleList = new List<BubbleTrigger>();
 
    private void Start(){
         rb = GetComponent<Rigidbody2D>();
@@ -37,6 +37,8 @@ public class PlayerUnit : MonoBehaviour
         
         if(other.gameObject.CompareTag("BubbleType1")){
                 bubbleController bubble = other.gameObject.GetComponent<bubbleController>();
+                BubbleTrigger bubbleTrigger = other.transform.GetChild(0).GetChild(0).GetComponent<BubbleTrigger>();
+                bubbleList.Remove(bubbleTrigger);
                 // bubble.absorption();
                 playerBase.AddExtraMoveSpeed(true);
                 Invoke("CancelExtraMoveSpeed", 1);
@@ -58,12 +60,16 @@ public class PlayerUnit : MonoBehaviour
 
    private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("BubbleType2")){
-            InvokeRepeating("GetAir", 0, 1);
+            BubbleTrigger bubbleTrigger = other.gameObject.GetComponent<BubbleTrigger>();
+            bubbleList.Add(bubbleTrigger);
+            InvokeRepeating("GetAir", 0, 0.5f);
         }
    }
 
    private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.CompareTag("BubbleType2")){
+            BubbleTrigger bubbleTrigger = other.gameObject.GetComponent<BubbleTrigger>();
+            bubbleList.Remove(bubbleTrigger);
             CancelInvoke("GetAir");
         }
    }

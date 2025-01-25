@@ -149,8 +149,8 @@ public class PlayerBase
         SetTargetRadius(targetRadius + amount);
     }
 
-    public void AddAir(){
-        airAmount++;
+    public void AddAir(int amount = 1){
+        airAmount += amount;
         if(airAmount >= initData.GenerateUnitAirAmount){
             GenerateUnit();
             airAmount = 0;
