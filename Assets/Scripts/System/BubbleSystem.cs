@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BubbleSystem : MonoBehaviour
 {
+    public enum BubbleType
+    {
+        Bubble,
+        Pearl
+    }
     private static BubbleSystem instance;
     public GameObject bubblePrefab;
     public static BubbleSystem Instance
