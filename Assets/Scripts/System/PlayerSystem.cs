@@ -44,11 +44,19 @@ public class PlayerSystem : MonoBehaviour
         GameObject poolGO = new GameObject("PlayerUnitPool");
         playerUnitPool = poolGO.AddComponent<ObjectPoolSystem>();
         playerUnitPool.CreatePool(playerUnitPrefab, 40);
+
+        InvokeRepeating("ChangeUnitRadius", 0, 1);
     }
 
     private void Update(){
         if(Input.GetKeyDown(KeyCode.Space)){
             GeneratePlayer(1);
+        }
+
+        if(Input.GetKeyDown(KeyCode.R)){
+            foreach(var player in playerList){
+                player.GenerateUnit();
+            }
         }
 
         // 獲取輸入軸的值
@@ -65,7 +73,6 @@ public class PlayerSystem : MonoBehaviour
 
         // 更新所有玩家的移動
         foreach(var player in playerList) {
-            player.ExpandRadius(Random.Range(-0.01f, 0.01f));
             player.RotateUnits();
             player.Move(inputData);
         }
@@ -93,5 +100,11 @@ public class PlayerSystem : MonoBehaviour
 
     public void ReturnUnit(GameObject unit){
         playerUnitPool.ReturnToPool(unit);
+    }
+
+    private void ChangeUnitRadius(){
+        foreach(var player in playerList){
+            player.ExpandRadius(Random.Range(-1f, 1f));
+        }
     }
 }

@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInitData:
     unitAmount: 5
+    unitMoveSpeed: 10
+    unitScale: 1
     unitGenerageRange: 3
+    GenerateUnitAirAmount: 10
