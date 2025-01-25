@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 43560a054800605459116eded7a08366
+guid: 8b9484b2cbd360e4dbad70849e0a1ee5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spritesheet (4)_0
+      name: spritesheet (8)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 560164e8ee36eea4f8a36eaaa5aa3657
-      internalID: -1978611770
+      spriteID: 4cf61c0bec568d147bdeb3fe91830385
+      internalID: 19240984
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet (4)_1
+      name: spritesheet (8)_1
       rect:
         serializedVersion: 2
-        x: 256
+        x: 64
         y: 0
-        width: 256
-        height: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f47ccd22b138b545aee4be444f2f992
-      internalID: 667922975
+      spriteID: 8d706f742ee816b449b0517064e4dc4e
+      internalID: -2110294712
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet (4)_2
+      name: spritesheet (8)_2
       rect:
         serializedVersion: 2
-        x: 512
+        x: 128
         y: 0
-        width: 256
-        height: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4faae8e34ab2fde47b59f95f19d6c354
-      internalID: 2026817562
+      spriteID: 164bd9f9ff45c0d41bd0ab1b3498e37a
+      internalID: -1132016164
       vertices: []
       indices: 
       edges: []
@@ -170,9 +170,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spritesheet (4)_0: -1978611770
-      spritesheet (4)_1: 667922975
-      spritesheet (4)_2: 2026817562
+      spritesheet (8)_0: 19240984
+      spritesheet (8)_1: -2110294712
+      spritesheet (8)_2: -1132016164
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
