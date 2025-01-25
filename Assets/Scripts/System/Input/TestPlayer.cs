@@ -12,7 +12,7 @@ public class TestPlayer : MonoBehaviour
 
     private void OnEnable()
     {
-        if (InputSystem.Instance.PlayerControllers[_Index] != null)
+        if (_Index < InputSystem.Instance.PlayerControllers.Length)
         {
             InputSystem.Instance.PlayerControllers[_Index].OnInputEvent += OnMove;
         }
