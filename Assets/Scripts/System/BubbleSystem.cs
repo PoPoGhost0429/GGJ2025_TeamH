@@ -5,6 +5,7 @@ using UnityEngine;
 public class BubbleSystem : MonoBehaviour
 {
     private static BubbleSystem instance;
+    public GameObject bubblePrefab;
     public static BubbleSystem Instance
     {
         get
@@ -22,6 +23,24 @@ public class BubbleSystem : MonoBehaviour
         }
     }
 
+    public void generateBubble(){
+        GameObject bubble = Instantiate(bubblePrefab);
+        /*
+        var:
+        followPlayerSpeed
+        absorbSpeed
+        absorbRatio
+        absorbMaxDis
+        gas
+        canAsborb
+
+        func:
+        follow(PlayerPos)
+        absorption()
+        */
+
+    }
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -36,7 +55,7 @@ public class BubbleSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        generateBubble();
     }
 
     // Update is called once per frame
@@ -44,4 +63,5 @@ public class BubbleSystem : MonoBehaviour
     {
         
     }
+
 }
