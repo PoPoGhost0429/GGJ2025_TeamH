@@ -29,10 +29,11 @@ public class BubbleSystem : MonoBehaviour
         }
     }
 
-    public void generateBubble(float x, float y, float scale){
+    public void generateBubble(float x, float y, float scale, float maxHeight){
         GameObject bubble = Instantiate(bubblePrefab);
         bubble.transform.position = new Vector3(x, y, 0);
         bubble.transform.localScale = new Vector3(scale, scale, 0);
+        bubble.transform.GetChild(0).gameObject.GetComponent<bubbleController>().maxHeight = maxHeight;
         /*
         var:
         absorbSpeed
@@ -71,7 +72,7 @@ public class BubbleSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //generateBubble(UnityEngine.Random.Range(-7.0f, 8.0f), -3.7f, 1.0f);
+        //generateBubble(UnityEngine.Random.Range(-7.0f, 8.0f), -3.7f, 1.0f, 50f);
         //generatePearl(UnityEngine.Random.Range(-7.0f, 8.0f), 5f, 0);
     }
 
