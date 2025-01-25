@@ -12,13 +12,13 @@ public enum EInputType
 [RequireComponent(typeof(PlayerInput))]
 public class TestPlayerController : MonoBehaviour
 {
+    public event Action<InputData> OnInputEvent;
+    
     private PlayerInput m_InputActions;
-    private TestPlayer m_Player;
     
     private void Awake()
     {
         m_InputActions = GetComponent<PlayerInput>();
-        m_Player = GetComponent<TestPlayer>();
     }
 
     private void OnEnable()
@@ -53,9 +53,12 @@ public class TestPlayerController : MonoBehaviour
     
     private void OnMove(InputAction.CallbackContext context)
     {
-        Vector2 moveDir = context.ReadValue<Vector2>();
+        InputData inputData = new InputData()
+        {
+            moveDirection = context.ReadValue<Vector2>()
+        };
         
-        m_Player.SetMoveInput(moveDir);
+        OnInputEvent?.Invoke(inputData);
     }
     
     private void OnPause(InputAction.CallbackContext context)
