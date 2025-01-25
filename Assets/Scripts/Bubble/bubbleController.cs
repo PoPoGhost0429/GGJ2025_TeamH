@@ -11,13 +11,9 @@ public class bubbleController : BubbleBase{
     public bool canAsborb = false;
     protected override void Start(){
         transform.position = new Vector3(UnityEngine.Random.Range(-7.0f, 8.0f), -3.7f, 0);
-        transform.localScale = new Vector3(0.1f, 0.1f, 0);
         Transform child = transform.GetChild(0);
         child.gameObject.tag = "BubbleType1";
         gameObject.tag = "BubbleType2";
-    }
-    public void setMaxScale(float scale){
-        maxScale = scale;
     }
     protected override void Update(){
         if (transform.localScale.x < maxScale && !isMax){
