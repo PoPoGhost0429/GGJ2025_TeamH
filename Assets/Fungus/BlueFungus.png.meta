@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9a6ff4c91921e124c9c971854b1b59ab
+guid: bcb28bafb5100ab4f9bb644d309a5bc6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -102,8 +102,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 831f0a467e0d00e4fb0d9003fc429434
-      internalID: -756060589
+      spriteID: 36a49877e068d3442a97d15104889d69
+      internalID: 1542797611
       vertices: []
       indices: 
       edges: []
@@ -121,10 +121,10 @@ TextureImporter:
       name: BlueFungus_1
       rect:
         serializedVersion: 2
-        x: 256
+        x: 64
         y: 0
-        width: 256
-        height: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56a673c5ab3e0f443a71b4414df67728
-      internalID: -266953064
+      spriteID: 32fb7e6a9c3b5944791d01566e501f68
+      internalID: -690771637
       vertices: []
       indices: 
       edges: []
@@ -142,10 +142,10 @@ TextureImporter:
       name: BlueFungus_2
       rect:
         serializedVersion: 2
-        x: 512
+        x: 128
         y: 0
-        width: 256
-        height: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4943bab91e83df74a922ce0462ec13bf
-      internalID: -630582183
+      spriteID: c33b16238c065d54bbbe8c75f3c22803
+      internalID: -1278222660
       vertices: []
       indices: 
       edges: []
@@ -170,9 +170,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BlueFungus_0: -756060589
-      BlueFungus_1: -266953064
-      BlueFungus_2: -630582183
+      BlueFungus_0: 1542797611
+      BlueFungus_1: -690771637
+      BlueFungus_2: -1278222660
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

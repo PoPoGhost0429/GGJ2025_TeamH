@@ -15,6 +15,7 @@ public struct PlayerInitData
     public int GenerateUnitAirAmount;
 }
 
+[RequireComponent(typeof(Animator))]
 public class PlayerBase
 {
     private PlayerInitData initData;
@@ -22,36 +23,74 @@ public class PlayerBase
     private PlayerSystem playerSystem;
 
     private float rotationRadius = 2f;    // 當前旋轉半徑
-    private float targetRadius = 2f;      // 目標旋轉半徑
+    private float targetRadius = 1f;      // 目標旋轉半徑
     private float minRadius = 1f;         // 最小半徑
     private float maxRadius = 3f;         // 最大半徑
+
+    private float extraMoveSpeed = 0f;
+
+    private float extraRadius = 0f;
+
+    private float extraRadiusSpeed = 0f;
+
+    private float dispersionRadius = 3f;
+
     private float radiusChangeSpeed = 1f; // 降低半徑變化速度
-    private float rotationSpeed = 1.5f;   // 降低旋轉速度
+    private float rotationSpeed = 3f;   // 降低旋轉速度
     private float currentAngle = 0f;      // 當前角度
     private Vector3 groupPosition;        // 群體位置
 
+    private Vector3 startPosition;
+
+    private RuntimeAnimatorController animatorController;
+
     private int airAmount;
 
-    public PlayerBase(PlayerInitData data)
+    private InputData inputData;
+
+    public PlayerBase(int playerID, PlayerInitData data, RuntimeAnimatorController animatorController, Vector3 position)
     {
         playerSystem = PlayerSystem.Instance;
         this.initData = data;
+        this.startPosition = position;
+        this.animatorController = animatorController;
         for (int i = 0; i < initData.unitAmount; i++)
         {
             GenerateUnit();
         }
         
         groupPosition = GetUnitCenterPosition();
+
+        InputSystem.Instance.PlayerControllers[playerID].OnInputEvent += Move;
+    }
+
+    public bool CheckIsAlive(){
+        return unitList.Count > 0;
+    }
+
+    public int GetUnitAmount(){
+        return unitList.Count;
+    }
+
+    public void AddExtraMoveSpeed(bool spedUp){
+        extraMoveSpeed = spedUp ? 2f : -2f;
+    }
+
+    public void ClearExtraMoveSpeed(){
+        extraMoveSpeed = 0f;
     }
 
     public void Move(InputData inputData){
         // 更新群體位置
-        groupPosition += (Vector3)inputData.moveDirection * initData.unitMoveSpeed * Time.deltaTime;
+        this.inputData = inputData;
+        // groupPosition += (Vector3)inputData.moveDirection * initData.unitMoveSpeed * Time.deltaTime;
     }
 
     public void RotateUnits()
     {
-        rotationRadius = Mathf.Lerp(rotationRadius, targetRadius, radiusChangeSpeed * Time.deltaTime);
+        groupPosition += (Vector3)inputData.moveDirection * initData.unitMoveSpeed * Time.deltaTime;
+        float finalRadius = targetRadius + extraRadius;
+        rotationRadius = Mathf.Lerp(rotationRadius, finalRadius, (radiusChangeSpeed + extraRadiusSpeed) * Time.deltaTime);
         currentAngle += rotationSpeed * Time.deltaTime;
         
         Vector3 centerPos = groupPosition;
@@ -70,7 +109,7 @@ public class PlayerBase
             Vector3 targetPosition = centerPos + offset;
             Vector2 moveDirection = ((Vector2)(targetPosition - unitList[i].transform.position));
             // 不需要 normalized，讓距離影響移動速度
-            unitList[i].Move(moveDirection, initData.unitMoveSpeed);
+            unitList[i].Move(moveDirection, initData.unitMoveSpeed + extraMoveSpeed);
         }
     }
 
@@ -80,6 +119,7 @@ public class PlayerBase
         unit.transform.localScale = Vector3.one * initData.unitScale;
         PlayerUnit playerUnit = unit.GetComponent<PlayerUnit>();
         playerUnit.SetPlayerBase(this);
+        playerUnit.GetComponent<Animator>().runtimeAnimatorController = animatorController;
         unitList.Add(playerUnit);
     }
 
@@ -94,7 +134,7 @@ public class PlayerBase
         {
             return (centerPosition / unitList.Count) - groupPosition;
         }
-        return Vector3.zero;
+        return startPosition;
     }
 
     // 設置目標半徑
@@ -109,11 +149,37 @@ public class PlayerBase
         SetTargetRadius(targetRadius + amount);
     }
 
-    public void AddAir(){
-        airAmount++;
+    public void AddAir(int amount = 1){
+        Debug.Log($"AddAir: {amount}");
+        airAmount += amount;
         if(airAmount >= initData.GenerateUnitAirAmount){
             GenerateUnit();
             airAmount = 0;
+        }
+    }
+
+    public void Dispersion()
+    {
+        extraRadius = dispersionRadius;
+        extraRadiusSpeed = 3f;
+        foreach(var unit in unitList){
+            unit.extraSpeed = 3f;
+        }
+    }
+
+    public void Polymerization()
+    {
+        extraRadius -= 0.5f;
+        extraRadiusSpeed -= 0.5f;
+        foreach(var unit in unitList){
+            unit.extraSpeed -= 0.4f;
+            unit.extraSpeed = Mathf.Clamp(unit.extraSpeed, 1f, 3f);
+        }
+        if(extraRadius < 0f){
+            extraRadius = 0f;
+        }
+        if(extraRadiusSpeed < 0f){
+            extraRadiusSpeed = 0f;
         }
     }
 

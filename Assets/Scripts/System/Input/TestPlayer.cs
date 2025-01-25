@@ -4,22 +4,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class TestPlayer : MonoBehaviour, IMovable
+public class TestPlayer : MonoBehaviour
 {
-    public int Index => _Index;
-    
     [SerializeField] private int _Index;
-    [SerializeField] private float _Speed = 50f;
-
-    private Vector2 m_MoveDirection = Vector2.zero;
     
-    private void Update()
+    private InputData m_InputData;
+
+    private void OnEnable()
     {
-        transform.Translate(m_MoveDirection * (_Speed * Time.deltaTime));
+        if (_Index < InputSystem.Instance.PlayerControllers.Length)
+        {
+            InputSystem.Instance.PlayerControllers[_Index].OnInputEvent += OnMove;
+        }
+    }
+    
+    private void OnDisable()
+    {
+        if (InputSystem.Instance != null && _Index < InputSystem.Instance.PlayerControllers.Length &&
+            InputSystem.Instance.PlayerControllers[_Index] != null)
+        {
+            InputSystem.Instance.PlayerControllers[_Index].OnInputEvent -= OnMove;
+        }
     }
 
-    public void SetMoveInput(Vector2 direction)
+    private void Update()
     {
-        m_MoveDirection = direction;
+        transform.Translate(m_InputData.moveDirection * (10 * Time.deltaTime));
+    }
+
+    private void OnMove(InputData obj)
+    {
+        m_InputData = obj;
     }
 }
