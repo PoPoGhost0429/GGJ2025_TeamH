@@ -133,8 +133,7 @@ public class GameSystem : MonoBehaviour
             Vector2 position = spawnBubble.CalculateSpawnPosition(setting.index);
             // GameObject circle = Instantiate(bubblePrefab, position, Quaternion.identity);
             // circle.transform.localScale = new Vector3(setting.bubbleSize, setting.bubbleSize, 1);
-            
-            // BubbleSystem.Instance.GenerateBubble(BubbleSystem.BubbleType.Bubble, position, setting.bubbleSize);
+            BubbleSystem.Instance.GenerateBubble(BubbleSystem.BubbleType.Bubble, position, setting.bubbleSize);
         }
     }
 
@@ -146,8 +145,7 @@ public class GameSystem : MonoBehaviour
             Vector2 position = spawnPearl.CalculateSpawnPosition(setting.index);
             // GameObject circle = Instantiate(bubblePrefab, position, Quaternion.identity);
             // circle.transform.localScale = new Vector3(setting.bubbleSize, setting.bubbleSize, 1);
-
-            // BubbleSystem.Instance.GenerateBubble(BubbleSystem.BubbleType.Pearl, position, setting.bubbleSize);
+            BubbleSystem.Instance.GenerateBubble(BubbleSystem.BubbleType.Pearl, position, setting.bubbleSize);
         }
     }
 }
