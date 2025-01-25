@@ -72,6 +72,19 @@ public class PlayerSystem : MonoBehaviour
         }
 
         // 更新所有玩家的移動
+         // 獲取輸入軸的值
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        
+        // 創建移動方向向量
+        Vector2 moveDirection = new Vector2(horizontal, vertical).normalized;
+        
+        // 創建輸入數據
+        InputData inputData = new InputData{
+            moveDirection = moveDirection
+        };
+
+        // 更新所有玩家的移動
         foreach(var player in playerList) {
             player.RotateUnits();
         }

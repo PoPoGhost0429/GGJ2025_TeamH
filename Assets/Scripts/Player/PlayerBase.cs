@@ -41,6 +41,8 @@ public class PlayerBase
 
     private int airAmount;
 
+    private InputData inputData;
+
     public PlayerBase(int playerID, PlayerInitData data)
     {
         playerSystem = PlayerSystem.Instance;
@@ -73,12 +75,13 @@ public class PlayerBase
 
     public void Move(InputData inputData){
         // 更新群體位置
-        groupPosition += (Vector3)inputData.moveDirection * initData.unitMoveSpeed * Time.deltaTime;
+        this.inputData = inputData;
         // groupPosition += (Vector3)inputData.moveDirection * initData.unitMoveSpeed * Time.deltaTime;
     }
-
+    
     public void RotateUnits()
     {
+        groupPosition += (Vector3)inputData.moveDirection * initData.unitMoveSpeed * Time.deltaTime;
         float finalRadius = targetRadius + extraRadius;
         rotationRadius = Mathf.Lerp(rotationRadius, finalRadius, (radiusChangeSpeed + extraRadiusSpeed) * Time.deltaTime);
         currentAngle += rotationSpeed * Time.deltaTime;
