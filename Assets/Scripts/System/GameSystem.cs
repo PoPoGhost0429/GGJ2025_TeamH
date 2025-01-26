@@ -134,7 +134,7 @@ public class GameSystem : MonoBehaviour
             Vector2 position = spawnBubble.CalculateSpawnPosition(setting.index);
             // GameObject circle = Instantiate(bubblePrefab, position, Quaternion.identity);
             // circle.transform.localScale = new Vector3(setting.bubbleSize, setting.bubbleSize, 1);
-            BubbleSystem.Instance.generateBubble(position.x, position.y, setting.bubbleSize, bubbleMaxHeight);
+            BubbleSystem.Instance.generateBubble("Normal", position.x, position.y, setting.bubbleSize, bubbleMaxHeight);
         }
     }
 
