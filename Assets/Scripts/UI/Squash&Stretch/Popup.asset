@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5db43479108b7214c8033d0f0740fa3f, type: 3}
   m_Name: Popup
   m_EditorClassIdentifier: 
-  AxisToAffect: 3
+  AxisToAffect: 1
   CanOverwritten: 0
   PlayOnStart: 1
   PlayOnEnable: 1
@@ -47,5 +47,5 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   CanReverseAfterPlaying: 0
-  CanLoop: 0
+  CanLoop: 1
   LoopingDelay: 0.5
