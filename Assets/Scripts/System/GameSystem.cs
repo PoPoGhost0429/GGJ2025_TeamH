@@ -33,7 +33,7 @@ public class GameSystem : MonoBehaviour
     }
 
     public float gameTime = 120;
-    public float bubbleMaxHeight = 17.5f;
+    public float bubbleMaxHeight = 11.5f;
     public GameObject spawnBubbleBasePrefab;
     public GameObject spawnPearlBasePrefab;
     public Text readyText;
@@ -81,6 +81,7 @@ public class GameSystem : MonoBehaviour
 
     public void InitGame()
     {
+        
         playerCount = InputSystem.Instance.PlayerControllers.Count;
         PlayerSystem.Instance.InitPlayerSystem();
         PlayerSystem.Instance.GeneratePlayer(playerCount);
