@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Unit_Hit
   m_EditorClassIdentifier: 
   AxisToAffect: 1
-  CanOverwritten: 1
+  CanOverwritten: 0
   PlayOnStart: 0
+  PlayOnEnable: 0
   CanPlayEveryTime: 1
   PlayPercentage: 100
   Duration: 0.25
