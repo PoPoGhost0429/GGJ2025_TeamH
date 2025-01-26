@@ -32,15 +32,13 @@ public class GameSystem : MonoBehaviour
     }
 
     public float gameTime = 300;
+    public float bubbleMaxHeight = 17.5f;
     public GameObject spawnBubbleBasePrefab;
     public GameObject spawnPearlBasePrefab;
-    public GameObject bubblePrefab;
     private SpawnBubble spawnBubble;
     private SpawnBubble spawnPearl;
     private GameState gameState = default;
-    private List<bool> playersAlive;
     private int playerCount;
-    private float bubbleMaxHeight = 20;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -65,16 +63,12 @@ public class GameSystem : MonoBehaviour
             return;
 
         CheckGameEnd();
-        Debug.Log("Game Time: " + (int)gameTime);
     }
 
     public void InitGame()
     {
         // Get player count input from UI
         playerCount = 2;
-        playersAlive = new List<bool>(playerCount);
-        for (int i = 0; i < playerCount; i++)
-            playersAlive.Add(true);
         PlayerSystem.Instance.InitPlayerSystem();
         PlayerSystem.Instance.GeneratePlayer(playerCount);
 
@@ -89,9 +83,7 @@ public class GameSystem : MonoBehaviour
 
     private void CheckGameEnd()
     {
-        int alivePlayerCount = playersAlive.Count(b => b);
-
-        if (gameTime <= 0 || alivePlayerCount == 1)
+        if (gameTime <= 0 || CheckOnlyOnePlayer())
         {
             Time.timeScale = 0;
             gameState = GameState.End;
@@ -102,19 +94,50 @@ public class GameSystem : MonoBehaviour
         }        
     }
 
+    private bool CheckOnlyOnePlayer()
+    {
+        int alivePlayerCount = 0;
+        for (int i = 0; i < playerCount; i++)
+        {
+            if (PlayerSystem.Instance.GetPlayer(i).CheckIsAlive())
+            {
+                alivePlayerCount++;
+            }
+        }
+        return alivePlayerCount == 1;
+    }
+
     private string GetWinner()
     {
-        int winnerIndex = 0;
-        int maxScore = 0;
-        for (int i = 0; i < playersAlive.Count; i++)
+        int maxUnitCount = -1;
+        List<int> winnerIndices = new List<int>();
+
+        for (int i = 0; i < playerCount; i++)
         {
-            // if (playersAlive[i] && PlayerSystem.Instance.GetPlayer(i).score > maxScore)
-            // {
-            //     maxScore = PlayerSystem.Instance.GetPlayer(i).score;
-            //     winnerIndex = i;
-            // }
+            if (PlayerSystem.Instance.GetPlayer(i).CheckIsAlive())
+            {
+                int unitCount = PlayerSystem.Instance.GetPlayer(i).GetUnitAmount();
+                if (unitCount > maxUnitCount)
+                {
+                    maxUnitCount = unitCount;
+                    winnerIndices.Clear();
+                    winnerIndices.Add(i);
+                }
+                else if (unitCount == maxUnitCount)
+                {
+                    winnerIndices.Add(i);
+                }
+            }
         }
-        return (winnerIndex + 1) + "P";
+
+        if (winnerIndices.Count == playerCount)
+        {
+            return "All players Win!";
+        }
+        else
+        {
+            return string.Join(" ", winnerIndices.Select(index => (index + 1) + "P")) + " Win!";
+        }
     }
 
     private IEnumerator GameTimeCoroutine()
@@ -122,6 +145,7 @@ public class GameSystem : MonoBehaviour
         while (gameTime > 0)
         {
             gameTime -= Time.deltaTime;
+            Debug.Log("Game Time: " + (int)gameTime);
             yield return null;
         }
     }
