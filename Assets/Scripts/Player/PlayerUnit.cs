@@ -15,7 +15,7 @@ public class PlayerUnit : MonoBehaviour
 
     private bool isActivate = false;
 
-    private float maxHeight = 17f;
+    private float maxHeight = 11.5f;
 
    private void Start(){
         rb = GetComponent<Rigidbody2D>();

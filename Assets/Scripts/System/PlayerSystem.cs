@@ -11,6 +11,9 @@ public class PlayerSystem : MonoBehaviour
     [SerializeField] private GameObject playerUnitPrefab;
     private ObjectPoolSystem playerUnitPool;
     [SerializeField] private PlayerData playerData;
+
+    [SerializeField] private List<int> debugPlayerUnit = new List<int>();
+
     public static PlayerSystem Instance
     {
         get
@@ -42,33 +45,20 @@ public class PlayerSystem : MonoBehaviour
     public void InitPlayerSystem(){
         GameObject poolGO = new GameObject("PlayerUnitPool");
         playerUnitPool = poolGO.AddComponent<ObjectPoolSystem>();
-        playerUnitPool.CreatePool(playerUnitPrefab, 40);
+        playerUnitPool.CreatePool(playerUnitPrefab, 100);
 
         InvokeRepeating("ChangeUnitRadius", 0, 1);
     }
 
     private void Update(){
-        if(Input.GetKeyDown(KeyCode.R)){
-            foreach(var player in playerList){
-                player.GenerateUnit();
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.K)){
-            foreach(var player in playerList){
-                player.StartDispersion();
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.L)){
-            foreach(var player in playerList){
-                player.EndDispersion();
-            }
-        }
 
         // 更新所有玩家的移動
         foreach(var player in playerList) {
             player.RotateUnits();
+        }
+
+        for(int i = 0; i < debugPlayerUnit.Count; i++){
+            debugPlayerUnit[i] = playerList[i].GetUnitAmount();
         }
     }
 
@@ -85,6 +75,7 @@ public class PlayerSystem : MonoBehaviour
         {            
             PlayerBase player = new PlayerBase(i,playerData.playerInitData, playerData.animatorControllers[i], new Vector3(0,0,0));
             playerList.Add(player);
+            debugPlayerUnit.Add(5);
         }
     }
 
