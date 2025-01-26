@@ -68,7 +68,7 @@ public class GameSystem : MonoBehaviour
     public void InitGame()
     {
         // Get player count input from UI
-        playerCount = 2;
+        playerCount = InputSystem.Instance.PlayerControllers.Count;
         PlayerSystem.Instance.InitPlayerSystem();
         PlayerSystem.Instance.GeneratePlayer(playerCount);
 
