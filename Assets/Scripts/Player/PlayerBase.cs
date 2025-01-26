@@ -50,6 +50,10 @@ public class PlayerBase
 
     private IEnumerator coroutine;
 
+    private bool isDispersion = false;
+
+    private float maxHeight = 17f;
+
     public PlayerBase(int playerID, PlayerInitData data, RuntimeAnimatorController animatorController, Vector3 position)
     {
         playerSystem = PlayerSystem.Instance;
@@ -64,7 +68,6 @@ public class PlayerBase
         groupPosition = GetUnitCenterPosition();
 
         InputSystem.Instance.PlayerControllers[playerID].OnInputEvent += Move;
-        coroutine = DispersionCoroutine();
     }
 
     public bool CheckIsAlive(){
@@ -77,6 +80,10 @@ public class PlayerBase
 
     public void AddExtraMoveSpeed(bool spedUp){
         extraMoveSpeed = spedUp ? 2f : -2f;
+    }
+
+    public void SubMaxHeight(float amount){
+        maxHeight -= amount;
     }
 
     public void ClearExtraMoveSpeed(){
@@ -121,6 +128,7 @@ public class PlayerBase
         GameObject unit = playerSystem.GenerateUnit(GetUnitCenterPosition() + randomOffset); 
         unit.transform.localScale = Vector3.one * initData.unitScale;
         PlayerUnit playerUnit = unit.GetComponent<PlayerUnit>();
+        playerUnit.SetMaxHeight(maxHeight);
         playerUnit.SetPlayerBase(this);
         playerUnit.GetComponent<Animator>().runtimeAnimatorController = animatorController;
         unitList.Add(playerUnit);
@@ -163,6 +171,10 @@ public class PlayerBase
 
     public void StartDispersion()
     {
+        if(isDispersion){
+            return;
+        }
+        coroutine = DispersionCoroutine();
         playerSystem.StartCoroutine(coroutine);
     }
 
@@ -177,13 +189,14 @@ public class PlayerBase
     }
 
     private IEnumerator DispersionCoroutine(){
+        isDispersion = true;
         const float extraSpeed = 10f;
         extraRadius = dispersionRadius;
         extraRadiusSpeed = extraSpeed;
         foreach(var unit in unitList){
             unit.extraSpeed = extraSpeed;
         }
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
         while(extraRadius > 0f){
             extraRadius -= 0.5f;
             extraRadiusSpeed -= 0.5f;
@@ -197,7 +210,8 @@ public class PlayerBase
             if(extraRadiusSpeed < 0f){
                 extraRadiusSpeed = 0f;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
         }
+        isDispersion = false;
     }
 }

@@ -15,6 +15,8 @@ public class PlayerUnit : MonoBehaviour
 
     private bool isActivate = false;
 
+    private float maxHeight = 17f;
+
    private void Start(){
         rb = GetComponent<Rigidbody2D>();
 
@@ -27,6 +29,10 @@ public class PlayerUnit : MonoBehaviour
         this.playerBase = playerBase;
    }
 
+   public void SetMaxHeight(float maxHeight){
+        this.maxHeight = maxHeight;
+   }
+
    public void Move(Vector3 moveDirection, float moveSpeed){
         if(!isActivate){
             return;
@@ -37,6 +43,11 @@ public class PlayerUnit : MonoBehaviour
         
         // 計算目標位置
         targetPosition = (Vector2)transform.position + (Vector2)moveDirection * moveSpeed * Time.fixedDeltaTime;
+        
+        // 限制高度上限
+        if(targetPosition.y > maxHeight) {
+            targetPosition.y = maxHeight;
+        }
         
         // 使用 MovePosition 進行平滑移動
         rb.MovePosition(Vector2.Lerp(rb.position, targetPosition, smoothSpeed * extraSpeed * Time.fixedDeltaTime));

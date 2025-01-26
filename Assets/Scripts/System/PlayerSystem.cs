@@ -88,6 +88,12 @@ public class PlayerSystem : MonoBehaviour
         }
     }
 
+    public void SubMaxHeight(float amount){
+        foreach(var player in playerList){
+            player.SubMaxHeight(amount);
+        }
+    }
+
     public GameObject GenerateUnit(Vector3 position){
         return playerUnitPool.GetFromPool(playerUnitPrefab.name, position, Quaternion.identity);
     }
