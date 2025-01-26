@@ -13,16 +13,16 @@ namespace UI
         [SerializeField] private BacteriumContent _BacteriumContentPrefab;
         [SerializeField] private Sprite[] _BacteriumIcons;
         
-        private readonly int m_Amount = 4;
-        
-        private void Awake()
+        private void OnEnable()
         {
-            // TODO 生成等同接入設備數量的玩家
-            for (int i = 0; i < m_Amount; i++)
+            InputSystem.Instance.OnPlayerConnectedEvent += OnPlayerConnected;
+        }
+
+        private void OnDisable()
+        {
+            if (InputSystem.Instance != null)
             {
-                BacteriumContent obj = Instantiate(_BacteriumContentPrefab, transform);
-                obj.Index = i + 1;
-                obj.Sprite = _BacteriumIcons[i];
+                InputSystem.Instance.OnPlayerConnectedEvent -= OnPlayerConnected;
             }
         }
 
@@ -30,8 +30,7 @@ namespace UI
         {
             _StartButton.onClick.AddListener(() =>
             {
-                Debug.Log("Start");
-                SceneManager.LoadScene(EScene.InputTest.ToString());
+                SceneManager.LoadScene(EScene.MainGame.ToString());
             });
             
             _ExitButton.onClick.AddListener(() =>
@@ -39,5 +38,17 @@ namespace UI
                 SceneManager.LoadScene(EScene.MainMenuScene.ToString());
             });
         }
+        
+        private void OnPlayerConnected(int count)
+        {
+            // TODO 生成等同接入設備數量的玩家
+            for (int i = 0; i < count; i++)
+            {
+                BacteriumContent obj = Instantiate(_BacteriumContentPrefab, transform);
+                obj.Index = i + 1;
+                obj.Sprite = _BacteriumIcons[i];
+            }
+        }
+
     }
 }

@@ -2,8 +2,8 @@ namespace UI
 {
     public enum EScene
     {
-        MainMenuScene,
-        SelectScene,
-        InputTest,
+        MainMenuScene = 0,
+        SelectScene = 1,
+        MainGame = 2,
     }
 }

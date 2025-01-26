@@ -1,5 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public struct InputData
 {
@@ -33,11 +38,17 @@ public class InputSystem : MonoBehaviour
             return instance;
         }
     }
-    public TestPlayerController[] PlayerControllers { get; private set; } = new TestPlayerController[4];
+
+    public event Action<int> OnPlayerConnectedEvent;
+    
+    public List<TestPlayerController> PlayerControllers { get; private set; } = new List<TestPlayerController>();
     
     [SerializeField] private GameObject _PauseMenu;
-    [SerializeField] private GameObject _PlayerPrefab;
-    
+    [SerializeField] private GameObject _InputPrefab;
+
+    private List<PlayerInput> m_PlayerInputs = new List<PlayerInput>();
+
+#region Life Cycle
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -47,85 +58,92 @@ public class InputSystem : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
-        
-        // AddKeyBoardPlayer(2);
-        // AddGamePadPlayer();
-        PlayerControllers = FindObjectsOfType<TestPlayerController>();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.activeSceneChanged += OnSceneChange;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.activeSceneChanged -= OnSceneChange;
+    }
+#endregion
+
+    private void OnSceneChange(Scene arg0, Scene arg1)
+    {
+        if (arg1.buildIndex == (int)EScene.SelectScene)
+        {
+            foreach (TestPlayerController variable in PlayerControllers)
+            {
+                if(variable == null) continue;
+                DestroyImmediate(variable.gameObject);
+            }
+            
+            m_PlayerInputs.Clear();
+            m_PlayerInputs.Capacity = 0;
+            PlayerControllers.Clear();
+            PlayerControllers.Capacity = 0;
+            
+            AddKeyBoardPlayer(2);
+            AddGamePadPlayer();
+            
+            PlayerControllers = FindObjectsOfType<TestPlayerController>().ToList();
+            OnPlayerConnectedEvent?.Invoke(PlayerControllers.Count);
+        }
     }
 
     /// <summary>
     /// 生成鍵盤控制玩家
     /// </summary>
     /// <param name="amount">生成數量</param>
-    public void AddKeyBoardPlayer(int amount)
+    private void AddKeyBoardPlayer(int amount)
     {
-        PlayerInput.Instantiate(_PlayerPrefab, controlScheme: "KeyboardLeft", pairWithDevice: Keyboard.current);
-        
-        if (amount == 2)
-        {
-            PlayerInput.Instantiate(_PlayerPrefab, controlScheme: "KeyboardRight", pairWithDevice: Keyboard.current);
-        }
+        m_PlayerInputs.Add(JoinPlayer(EInputSource.KeyBoardLeft, _InputPrefab));
+        m_PlayerInputs.Add(JoinPlayer(EInputSource.KKeyboardRight, _InputPrefab));
     }
     
     /// <summary>
     /// 生成Controller控制玩家
     /// </summary>
-    public void AddGamePadPlayer()
+    private void AddGamePadPlayer()
     {
         int gamepadCount = Gamepad.all.Count;
         switch (gamepadCount)
         {
             case >= 2:
-                JoinPlayer(EInputSource.Controller1, _PlayerPrefab);
-                JoinPlayer(EInputSource.Controller2, _PlayerPrefab);
+                m_PlayerInputs.Add(JoinPlayer(EInputSource.Controller1, _InputPrefab));
+                m_PlayerInputs.Add(JoinPlayer(EInputSource.Controller2, _InputPrefab));
                 break;
             case 1:
-                JoinPlayer(EInputSource.Controller1, _PlayerPrefab);
+                m_PlayerInputs.Add(JoinPlayer(EInputSource.Controller1, _InputPrefab));
                 break;
-        }
-    }
-
-    public void OnPlayerPause()
-    {
-        _PauseMenu.SetActive(true);
-        // switch action map 
-        foreach (TestPlayerController input in PlayerControllers)
-        {
-            input.SetActionMap(EInputType.UI);
-        }
-    }
-
-    public void OnPlayerResume()
-    {
-        _PauseMenu.SetActive(false);
-        // switch action map
-        foreach (TestPlayerController input in PlayerControllers)
-        {
-            input.SetActionMap(EInputType.GamePlay);
         }
     }
     
-    private void JoinPlayer(EInputSource source, GameObject playerPrefab)
+    private PlayerInput JoinPlayer(EInputSource source, GameObject playerPrefab)
     {
         switch (source)
         {
             case EInputSource.KeyBoardLeft:
-                PlayerInput.Instantiate(playerPrefab,
+                return PlayerInput.Instantiate(playerPrefab,
                     controlScheme: "KeyboardLeft", pairWithDevice: Keyboard.current);
-                break;
+            
             case EInputSource.KKeyboardRight:
-                PlayerInput.Instantiate(playerPrefab,
+                return PlayerInput.Instantiate(playerPrefab,
                     controlScheme: "KeyboardRight", pairWithDevice: Keyboard.current);
-                break;
+            
             case EInputSource.Controller1:
-                PlayerInput.Instantiate(playerPrefab,
+                return PlayerInput.Instantiate(playerPrefab,
                     controlScheme: "Controller1", pairWithDevice: Gamepad.all[0]);
-                break;
+            
             case EInputSource.Controller2:
-                PlayerInput.Instantiate(playerPrefab,
+                return PlayerInput.Instantiate(playerPrefab,
                     controlScheme: "Controller2", pairWithDevice: Gamepad.all[1]);
-                break;
         }
+
+        return null;
     }
     
     public void OnPlayerPause()
@@ -142,7 +160,7 @@ public class InputSystem : MonoBehaviour
 
     public void SwitchInputMap(EInputType inputType)
     {
-        foreach (TestPlayerController input in m_PlayerInputs)
+        foreach (TestPlayerController input in PlayerControllers)
         {
             input.SetActionMap(inputType);
         }

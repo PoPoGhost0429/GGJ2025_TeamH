@@ -12,7 +12,7 @@ public class TestPlayer : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_Index < InputSystem.Instance.PlayerControllers.Length)
+        if (_Index < InputSystem.Instance.PlayerControllers.Count)
         {
             InputSystem.Instance.PlayerControllers[_Index].OnInputEvent += OnMove;
         }
@@ -20,7 +20,7 @@ public class TestPlayer : MonoBehaviour
     
     private void OnDisable()
     {
-        if (InputSystem.Instance != null && _Index < InputSystem.Instance.PlayerControllers.Length &&
+        if (InputSystem.Instance != null && _Index < InputSystem.Instance.PlayerControllers.Count &&
             InputSystem.Instance.PlayerControllers[_Index] != null)
         {
             InputSystem.Instance.PlayerControllers[_Index].OnInputEvent -= OnMove;

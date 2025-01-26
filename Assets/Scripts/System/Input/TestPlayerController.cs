@@ -19,6 +19,8 @@ public class TestPlayerController : MonoBehaviour
     private void Awake()
     {
         m_InputActions = GetComponent<PlayerInput>();
+        
+        DontDestroyOnLoad(this);
     }
 
     private void OnEnable()
