@@ -43,9 +43,13 @@ public class bubbleController : BubbleBase{
         }
         else{
             Debug.Log("Invalid Bubble Type");
-        }
-        
+        }  
     }
+
+    public string getBubbleType(string type){
+        return bubbleType;
+    }
+
     public float absorption(){
         float resGas = maxGas*0.01f;
         Nowgas -= resGas;

@@ -41,8 +41,9 @@ public class BubbleSystem : MonoBehaviour
         absorbRatio
 
         func:
-        absorption()
-        float bubble.getChild(0).getChild(0).getGasValue()
+        absorption();
+        float bubble.getChild(0).getChild(0).getGasValue();
+        string getBubbleType();
         */
         
     }
