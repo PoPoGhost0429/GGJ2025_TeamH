@@ -65,9 +65,14 @@ public class PlayerUnit : MonoBehaviour
                 playerBase.AddAir((int)bubbleTrigger.getGasValue());
                 // bubbleList.Remove(bubbleTrigger);
                 // bubble.absorption();
+                
                 if(bubble.getBubbleType() == "Rainbow"){
                     playerBase.AddExtraMoveSpeed(true);
                     Invoke("CancelExtraMoveSpeed", 5);
+                    AudioController.Instance.PlaySound(1);
+                }
+                else{
+                    AudioController.Instance.PlaySound(Random.Range(5, 11));
                 }
             }
         if(other.gameObject.CompareTag("Pearl")){
