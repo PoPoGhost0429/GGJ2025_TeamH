@@ -27,10 +27,6 @@ public class StrawEvent : MonoBehaviour
 
     private void Update(){
         StrawEventUpdate();
-
-        if(Input.GetKeyDown(KeyCode.Space)){
-            StrawEventStart(3);
-        }
     }
 
    public void StrawEventStart(int stirTimes){

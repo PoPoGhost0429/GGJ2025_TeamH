@@ -125,7 +125,7 @@ public class PlayerBase
     }
 
     public void GenerateUnit(){
-        Vector3 randomOffset = new Vector3(Random.Range(-initData.unitGenerageRange, initData.unitGenerageRange), Random.Range(-initData.unitGenerageRange, initData.unitGenerageRange));
+        Vector3 randomOffset = new Vector3(Random.Range(-initData.unitGenerageRange, initData.unitGenerageRange), 0);
         GameObject unit = playerSystem.GenerateUnit(GetUnitCenterPosition() + randomOffset); 
         unit.transform.localScale = Vector3.one * initData.unitScale;
         PlayerUnit playerUnit = unit.GetComponent<PlayerUnit>();
