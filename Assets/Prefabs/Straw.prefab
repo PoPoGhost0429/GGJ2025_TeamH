@@ -119,7 +119,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 76, z: 0}
-  m_LocalScale: {x: 1, y: 10, z: 1}
+  m_LocalScale: {x: 1, y: 3.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1373455064167010287}
@@ -167,7 +167,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 787ce20df0e75ff4ca5a24a73eb8f499, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -190,12 +190,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   straw: {fileID: 5944647117455421832}
-  startYPos: 76
-  endYPos: 36
-  OffsetXRange: 9
-  stirRotRange: 9
-  inOutAnimTime: 3
-  stirAnimTime: 2
+  startYPos: 65
+  endYPos: 27
+  OffsetXRange: 5
+  stirRotRange: 5
+  inOutAnimTime: 2
+  stirAnimTime: 1
 --- !u!61 &959977644697107351
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -232,7 +232,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 1}
-    oldSize: {x: 5.12, y: 5.12}
+    oldSize: {x: 0.64, y: 10.8}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
