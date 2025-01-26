@@ -32,18 +32,24 @@ public class GameSystem : MonoBehaviour
         }
     }
 
-    public float gameTime = 300;
+    public float gameTime = 120;
     public float bubbleMaxHeight = 17.5f;
     public GameObject spawnBubbleBasePrefab;
     public GameObject spawnPearlBasePrefab;
     public Text readyText;
     public Text gameTimeText;
     public WinUI winUI;
+    public FireAnimController fireAnimController;
+    public StrawEvent strawEvent;
     private SpawnBubble spawnBubble;
     private SpawnBubble spawnPearl;
     private GameState gameState = default;
     private int playerCount;
     private float readyTime = 5;
+    private List<int> strawEventTime = new List<int>() { 90, 60, 30 };
+    private int fireMidTime = 80;
+    private int fireBigTime = 40;
+    
 
     private void Awake()
     {
@@ -167,6 +173,22 @@ public class GameSystem : MonoBehaviour
     {
         while (gameTime > 0)
         {
+            // Straw Event
+            if (strawEventTime.Contains((int)gameTime))
+            {
+                strawEvent.StrawEventStart(2);
+            }
+
+            // Fire Event
+            if ((int)gameTime == fireMidTime)
+            {
+                fireAnimController.PlayerMidFire();
+            }
+            if ((int)gameTime == fireBigTime)
+            {
+                fireAnimController.PlayerHighFire();
+            }
+
             gameTime -= Time.deltaTime;
             gameTimeText.text = $"{(int)gameTime / 60}:{(int)gameTime % 60:00}";
             Debug.Log("Game Time: " + (int)gameTime);
