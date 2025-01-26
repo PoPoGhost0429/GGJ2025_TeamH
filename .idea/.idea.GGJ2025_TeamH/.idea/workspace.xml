@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="eacdaa39-807f-4782-8bdf-464b10737943" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GGJ2025_TeamH/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GGJ2025_TeamH/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SelectScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SelectScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Input/InputActions.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Input/InputActions.inputactions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Input/TestPlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Input/TestPlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/BacteriumContent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/BacteriumContent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/SelectUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/SelectUI.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

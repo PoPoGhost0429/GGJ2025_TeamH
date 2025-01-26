@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using V.Tool.JuicyFeeling;
 
 namespace UI
 {
@@ -47,6 +48,9 @@ namespace UI
                 BacteriumContent obj = Instantiate(_BacteriumContentPrefab, transform);
                 obj.Index = i + 1;
                 obj.Sprite = _BacteriumIcons[i];
+
+                InputSystem.Instance.PlayerControllers[i].OnInteractEvent +=
+                    () => obj.GetComponentInChildren<SquashAndStretch>().PlaySquashAndStretch();
             }
         }
 

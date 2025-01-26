@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using V.Tool.JuicyFeeling;
 
 public class BacteriumContent : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class BacteriumContent : MonoBehaviour
     
     [SerializeField] private Text _IndexText;
     [SerializeField] private Image _Icon;
-
+    
     private void Start()
     {
         _IndexText.text = $"{Index}P";

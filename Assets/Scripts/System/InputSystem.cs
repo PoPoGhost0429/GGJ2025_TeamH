@@ -100,8 +100,8 @@ public class InputSystem : MonoBehaviour
     /// <param name="amount">生成數量</param>
     private void AddKeyBoardPlayer(int amount)
     {
-        m_PlayerInputs.Add(JoinPlayer(EInputSource.KeyBoardLeft, _InputPrefab));
         m_PlayerInputs.Add(JoinPlayer(EInputSource.KKeyboardRight, _InputPrefab));
+        m_PlayerInputs.Add(JoinPlayer(EInputSource.KeyBoardLeft, _InputPrefab));
     }
     
     /// <summary>

@@ -13,6 +13,7 @@ public enum EInputType
 public class TestPlayerController : MonoBehaviour
 {
     public event Action<InputData> OnInputEvent;
+    public event Action OnInteractEvent;
     
     private PlayerInput m_InputActions;
     
@@ -27,6 +28,7 @@ public class TestPlayerController : MonoBehaviour
     {
         m_InputActions.actions["Move"].performed += OnMove;
         m_InputActions.actions["Move"].canceled += OnMove;
+        m_InputActions.actions["Interact"].performed += OnPerform;
 
         m_InputActions.actions["Pause"].performed += OnPause;
         
@@ -37,6 +39,7 @@ public class TestPlayerController : MonoBehaviour
     {
         m_InputActions.actions["Move"].performed -= OnMove;
         m_InputActions.actions["Move"].canceled -= OnMove;
+        m_InputActions.actions["Interact"].performed -= OnPerform;
         
         m_InputActions.actions["Pause"].performed -= OnPause;
         
@@ -61,6 +64,14 @@ public class TestPlayerController : MonoBehaviour
         };
         
         OnInputEvent?.Invoke(inputData);
+    }
+    
+    private void OnPerform(InputAction.CallbackContext obj)
+    {
+        if (obj.performed)
+        {
+            OnInteractEvent?.Invoke();
+        }
     }
     
     private void OnPause(InputAction.CallbackContext context)
