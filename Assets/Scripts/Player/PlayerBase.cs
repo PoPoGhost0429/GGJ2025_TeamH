@@ -79,7 +79,7 @@ public class PlayerBase
     }
 
     public void AddExtraMoveSpeed(bool spedUp){
-        extraMoveSpeed = spedUp ? 2f : -2f;
+        extraMoveSpeed = spedUp ? 4f : -4f;
     }
 
     public void SubMaxHeight(float amount){

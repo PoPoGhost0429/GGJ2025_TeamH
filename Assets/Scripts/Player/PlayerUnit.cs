@@ -60,13 +60,15 @@ public class PlayerUnit : MonoBehaviour
         // Debug.Log(other.gameObject.tag);
         if(other.gameObject.CompareTag("BubbleType2")){
                 Debug.Log(other.gameObject.name);
-                // bubbleController bubble = other.gameObject.GetComponent<bubbleController>();
+                bubbleController bubble = other.gameObject.GetComponent<bubbleController>();
                 BubbleTrigger bubbleTrigger = other.transform.GetChild(0).GetComponent<BubbleTrigger>();
                 playerBase.AddAir((int)bubbleTrigger.getGasValue());
                 // bubbleList.Remove(bubbleTrigger);
                 // bubble.absorption();
-                playerBase.AddExtraMoveSpeed(true);
-                Invoke("CancelExtraMoveSpeed", 5);
+                if(bubble.getBubbleType() == "Rainbow"){
+                    playerBase.AddExtraMoveSpeed(true);
+                    Invoke("CancelExtraMoveSpeed", 5);
+                }
             }
         if(other.gameObject.CompareTag("Pearl")){
                Animator animator = GetComponent<Animator>();

@@ -46,7 +46,7 @@ public class bubbleController : BubbleBase{
         }  
     }
 
-    public string getBubbleType(string type){
+    public string getBubbleType(){
         return bubbleType;
     }
 
