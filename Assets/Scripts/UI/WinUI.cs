@@ -19,9 +19,13 @@ public class WinUI : MonoBehaviour
         _PlayagainBtn.onClick.AddListener(() => SceneManager.LoadScene(EScene.SelectScene.ToString()));
         _ExitBtn.onClick.AddListener(() => SceneManager.LoadScene(EScene.MainMenuScene.ToString()));
     }
-
-    public void ShowWinText(int winIndex)
+    private void Start()
     {
-        _WinText.text = $"{winIndex}P WIN!!!";
+        gameObject.SetActive(false);
+    }
+
+    public void ShowWinText(string result)
+    {
+        _WinText.text = result;
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameSystem : MonoBehaviour
 {
@@ -35,10 +36,15 @@ public class GameSystem : MonoBehaviour
     public float bubbleMaxHeight = 17.5f;
     public GameObject spawnBubbleBasePrefab;
     public GameObject spawnPearlBasePrefab;
+    public Text readyText;
+    public Text gameTimeText;
+    public WinUI winUI;
     private SpawnBubble spawnBubble;
     private SpawnBubble spawnPearl;
     private GameState gameState = default;
     private int playerCount;
+    private float readyTime = 5;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -54,7 +60,9 @@ public class GameSystem : MonoBehaviour
 
     private void Start()
     {
-        InitGame();
+        gameTimeText.text = $"{(int)gameTime / 60}:{(int)gameTime % 60:00}";
+        // InitGame();
+        StartCoroutine(ReadyCoroutine(readyTime));
     }  
 
     void Update()
@@ -67,7 +75,6 @@ public class GameSystem : MonoBehaviour
 
     public void InitGame()
     {
-        // Get player count input from UI
         playerCount = InputSystem.Instance.PlayerControllers.Count;
         PlayerSystem.Instance.InitPlayerSystem();
         PlayerSystem.Instance.GeneratePlayer(playerCount);
@@ -84,11 +91,13 @@ public class GameSystem : MonoBehaviour
     private void CheckGameEnd()
     {
         if (gameTime <= 0 || CheckOnlyOnePlayer())
-        {
+        {             
             Time.timeScale = 0;
             gameState = GameState.End;
             string winner = GetWinner();
             // Show winner UI
+            winUI.ShowWinText(winner);
+            winUI.gameObject.SetActive(true);
             Debug.Log("Game End, Winner: " + winner);
             return ;
         }        
@@ -140,14 +149,31 @@ public class GameSystem : MonoBehaviour
         }
     }
 
+    private IEnumerator ReadyCoroutine(float readyTime)
+    {
+        while (readyTime > 0)
+        {
+            readyTime -= Time.deltaTime;
+            readyText.text = ((int)readyTime).ToString();
+            yield return null;
+        }
+        readyText.text = "Start!!!";
+        yield return new WaitForSeconds(1);
+        InitGame();
+        readyText.gameObject.SetActive(false);
+    }
+
     private IEnumerator GameTimeCoroutine()
     {
         while (gameTime > 0)
         {
             gameTime -= Time.deltaTime;
+            gameTimeText.text = $"{(int)gameTime / 60}:{(int)gameTime % 60:00}";
             Debug.Log("Game Time: " + (int)gameTime);
             yield return null;
         }
+        readyText.gameObject.SetActive(true);
+        readyText.text = "Time's Up!";
     }
 
     private IEnumerator SpawnBubbles(SpawnBubbleSettingSO setting)
