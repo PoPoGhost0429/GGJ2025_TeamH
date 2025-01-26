@@ -68,6 +68,7 @@ public class PlayerBase
         groupPosition = GetUnitCenterPosition();
 
         InputSystem.Instance.PlayerControllers[playerID].OnInputEvent += Move;
+        InputSystem.Instance.PlayerControllers[playerID].OnInteractEvent += StartDispersion;
     }
 
     public bool CheckIsAlive(){
