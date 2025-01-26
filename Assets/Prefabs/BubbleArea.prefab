@@ -255,8 +255,8 @@ MonoBehaviour:
   Nowgas: 0
   canAsborb: 0
   bubbleTypeList:
-  - {fileID: 6622146624442822724, guid: ac3f7f314a7546943a24e1f36d29f5ac, type: 3}
-  - {fileID: 4973573355467318037, guid: 7ecf7cfab3b69844c99fe9aa6f8aacc1, type: 3}
+  - {fileID: 8039524748007263468, guid: ac3f7f314a7546943a24e1f36d29f5ac, type: 3}
+  - {fileID: 2523773300203562557, guid: 7ecf7cfab3b69844c99fe9aa6f8aacc1, type: 3}
 --- !u!1 &7803734106067992000
 GameObject:
   m_ObjectHideFlags: 0
