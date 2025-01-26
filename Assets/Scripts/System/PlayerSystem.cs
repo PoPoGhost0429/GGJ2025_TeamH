@@ -56,13 +56,13 @@ public class PlayerSystem : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.K)){
             foreach(var player in playerList){
-                player.Dispersion();
+                player.StartDispersion();
             }
         }
 
         if(Input.GetKeyDown(KeyCode.L)){
             foreach(var player in playerList){
-                player.Polymerization();
+                player.EndDispersion();
             }
         }
 
