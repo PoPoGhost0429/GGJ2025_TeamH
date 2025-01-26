@@ -56,13 +56,13 @@ public class PlayerSystem : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.K)){
             foreach(var player in playerList){
-                player.Dispersion();
+                player.StartDispersion();
             }
         }
 
         if(Input.GetKeyDown(KeyCode.L)){
             foreach(var player in playerList){
-                player.Polymerization();
+                player.EndDispersion();
             }
         }
 
@@ -85,6 +85,12 @@ public class PlayerSystem : MonoBehaviour
         {            
             PlayerBase player = new PlayerBase(i,playerData.playerInitData, playerData.animatorControllers[i], new Vector3(0,0,0));
             playerList.Add(player);
+        }
+    }
+
+    public void SubMaxHeight(float amount){
+        foreach(var player in playerList){
+            player.SubMaxHeight(amount);
         }
     }
 

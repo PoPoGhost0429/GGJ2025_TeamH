@@ -48,6 +48,12 @@ public class PlayerBase
 
     private InputData inputData;
 
+    private IEnumerator coroutine;
+
+    private bool isDispersion = false;
+
+    private float maxHeight = 17f;
+
     public PlayerBase(int playerID, PlayerInitData data, RuntimeAnimatorController animatorController, Vector3 position)
     {
         playerSystem = PlayerSystem.Instance;
@@ -73,7 +79,11 @@ public class PlayerBase
     }
 
     public void AddExtraMoveSpeed(bool spedUp){
-        extraMoveSpeed = spedUp ? 2f : -2f;
+        extraMoveSpeed = spedUp ? 4f : -4f;
+    }
+
+    public void SubMaxHeight(float amount){
+        maxHeight -= amount;
     }
 
     public void ClearExtraMoveSpeed(){
@@ -118,6 +128,7 @@ public class PlayerBase
         GameObject unit = playerSystem.GenerateUnit(GetUnitCenterPosition() + randomOffset); 
         unit.transform.localScale = Vector3.one * initData.unitScale;
         PlayerUnit playerUnit = unit.GetComponent<PlayerUnit>();
+        playerUnit.SetMaxHeight(maxHeight);
         playerUnit.SetPlayerBase(this);
         playerUnit.GetComponent<Animator>().runtimeAnimatorController = animatorController;
         unitList.Add(playerUnit);
@@ -158,33 +169,49 @@ public class PlayerBase
         }
     }
 
-    public void Dispersion()
+    public void StartDispersion()
     {
-        extraRadius = dispersionRadius;
-        extraRadiusSpeed = 3f;
-        foreach(var unit in unitList){
-            unit.extraSpeed = 3f;
+        if(isDispersion){
+            return;
         }
+        coroutine = DispersionCoroutine();
+        playerSystem.StartCoroutine(coroutine);
     }
 
-    public void Polymerization()
+    public void EndDispersion()
     {
-        extraRadius -= 0.5f;
-        extraRadiusSpeed -= 0.5f;
-        foreach(var unit in unitList){
-            unit.extraSpeed -= 0.4f;
-            unit.extraSpeed = Mathf.Clamp(unit.extraSpeed, 1f, 3f);
-        }
-        if(extraRadius < 0f){
-            extraRadius = 0f;
-        }
-        if(extraRadiusSpeed < 0f){
-            extraRadiusSpeed = 0f;
-        }
+        playerSystem.StopCoroutine(coroutine);
     }
 
     public void ReturnUnit(PlayerUnit unit){
         unitList.Remove(unit);
         playerSystem.ReturnUnit(unit.gameObject);
+    }
+
+    private IEnumerator DispersionCoroutine(){
+        isDispersion = true;
+        const float extraSpeed = 10f;
+        extraRadius = dispersionRadius;
+        extraRadiusSpeed = extraSpeed;
+        foreach(var unit in unitList){
+            unit.extraSpeed = extraSpeed;
+        }
+        yield return new WaitForSeconds(1);
+        while(extraRadius > 0f){
+            extraRadius -= 0.5f;
+            extraRadiusSpeed -= 0.5f;
+            foreach(var unit in unitList){
+                unit.extraSpeed -= 0.4f;
+                unit.extraSpeed = Mathf.Clamp(unit.extraSpeed, 1f, 10f);
+            }
+            if(extraRadius < 0f){
+                extraRadius = 0f;
+            }
+            if(extraRadiusSpeed < 0f){
+                extraRadiusSpeed = 0f;
+            }
+            yield return new WaitForSeconds(0.3f);
+        }
+        isDispersion = false;
     }
 }

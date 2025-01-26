@@ -28,7 +28,6 @@ public class BubbleTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.tag == "Player"){
-            Debug.Log("Leave");
             Transform parent = transform.parent;
             parent.GetComponent<Rigidbody2D>().gravityScale = -0.3f;
         }

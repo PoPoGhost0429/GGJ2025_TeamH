@@ -13,18 +13,30 @@ public class PlayerUnit : MonoBehaviour
 
     private List<BubbleTrigger> bubbleList = new List<BubbleTrigger>();
 
+    private bool isActivate = false;
+
+    private float maxHeight = 17f;
+
    private void Start(){
         rb = GetComponent<Rigidbody2D>();
 
         
         InvokeRepeating("GetAir", 0, 0.5f);
+        isActivate = true;
    }
 
    public void SetPlayerBase(PlayerBase playerBase){
         this.playerBase = playerBase;
    }
 
+   public void SetMaxHeight(float maxHeight){
+        this.maxHeight = maxHeight;
+   }
+
    public void Move(Vector3 moveDirection, float moveSpeed){
+        if(!isActivate){
+            return;
+        }
         if(rb == null){
             rb = GetComponent<Rigidbody2D>();
         }
@@ -32,28 +44,48 @@ public class PlayerUnit : MonoBehaviour
         // 計算目標位置
         targetPosition = (Vector2)transform.position + (Vector2)moveDirection * moveSpeed * Time.fixedDeltaTime;
         
+        // 限制高度上限
+        if(targetPosition.y > maxHeight) {
+            targetPosition.y = maxHeight;
+        }
+        
         // 使用 MovePosition 進行平滑移動
         rb.MovePosition(Vector2.Lerp(rb.position, targetPosition, smoothSpeed * extraSpeed * Time.fixedDeltaTime));
    }
 
    private void OnCollisionEnter2D(Collision2D other) {
+        if(!isActivate){
+            return;
+        }
         // Debug.Log(other.gameObject.tag);
         if(other.gameObject.CompareTag("BubbleType2")){
                 Debug.Log(other.gameObject.name);
-                // bubbleController bubble = other.gameObject.GetComponent<bubbleController>();
+                bubbleController bubble = other.gameObject.GetComponent<bubbleController>();
                 BubbleTrigger bubbleTrigger = other.transform.GetChild(0).GetComponent<BubbleTrigger>();
                 playerBase.AddAir((int)bubbleTrigger.getGasValue());
                 // bubbleList.Remove(bubbleTrigger);
                 // bubble.absorption();
-                playerBase.AddExtraMoveSpeed(true);
-                Invoke("CancelExtraMoveSpeed", 1);
+                if(bubble.getBubbleType() == "Rainbow"){
+                    playerBase.AddExtraMoveSpeed(true);
+                    Invoke("CancelExtraMoveSpeed", 5);
+                }
             }
         if(other.gameObject.CompareTag("Pearl")){
-            playerBase.ReturnUnit(this);
+               Animator animator = GetComponent<Animator>();
+               animator.SetTrigger("Explode");
+            isActivate = false;
+            Invoke("ReturnUnit", 0.4f);
         }
    }
 
+   private void ReturnUnit(){
+        playerBase.ReturnUnit(this);
+   }
+
    private void GetAir(){
+        if(!isActivate){
+            return;
+        }
         if(bubbleList.Count > 0){
             foreach(var bubble in bubbleList){
                 playerBase.AddAir((int)bubble.getGasValue());
@@ -66,6 +98,9 @@ public class PlayerUnit : MonoBehaviour
    }
 
    private void OnTriggerEnter2D(Collider2D other) {
+        if(!isActivate){
+            return;
+        }
         if(other.gameObject.CompareTag("BubbleType2")){
             BubbleTrigger bubbleTrigger = other.gameObject.GetComponent<BubbleTrigger>();
             bubbleList.Add(bubbleTrigger);
@@ -73,6 +108,9 @@ public class PlayerUnit : MonoBehaviour
    }
 
    private void OnTriggerExit2D(Collider2D other) {
+        if(!isActivate){
+            return;
+        }
         if(other.gameObject.CompareTag("BubbleType2")){
             BubbleTrigger bubbleTrigger = other.gameObject.GetComponent<BubbleTrigger>();
             bubbleList.Remove(bubbleTrigger);

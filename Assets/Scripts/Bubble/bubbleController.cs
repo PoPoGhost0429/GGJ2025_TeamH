@@ -8,9 +8,10 @@ using UnityEngine;
 public class bubbleController : BubbleBase{
     // Update is called once per frame
     public float absorbSpeed = 0.3f, absorbRatio = 0.8f, maxGas=100f, Nowgas = 0;
+    private string bubbleType = "Normal";
     public bool canAsborb = false;
+    [SerializeField] private List<GameObject> bubbleTypeList = new List<GameObject>();
     protected override void Start(){
-        //transform.position = new Vector3(UnityEngine.Random.Range(-7.0f, 8.0f), -3.7f, 0);
         Transform child = transform.GetChild(0);
         child.gameObject.tag = "BubbleType1";
         gameObject.tag = "BubbleType2";
@@ -27,13 +28,30 @@ public class bubbleController : BubbleBase{
         if (transform.position.y > maxHeight){
             Destroy(gameObject);
         }
+        if(bubbleType == "Normal"){
+            gameObject.GetComponent<SpriteRenderer>().sprite = bubbleTypeList[0].GetComponent<SpriteRenderer>().sprite;
+        }
+        else if(bubbleType == "Rainbow"){
+            gameObject.GetComponent<SpriteRenderer>().sprite = bubbleTypeList[1].GetComponent<SpriteRenderer>().sprite;
+        }
 
+    }
 
+    public void setBubbleType(string type){
+        if(type == "Normal" || type == "Rainbow"){
+            bubbleType = type;
+        }
+        else{
+            Debug.Log("Invalid Bubble Type");
+        }  
+    }
+
+    public string getBubbleType(){
+        return bubbleType;
     }
 
     public float absorption(){
         float resGas = maxGas*0.01f;
-        Debug.Log("Enter");
         Nowgas -= resGas;
         transform.localScale -= new Vector3(absorbSpeed*absorbRatio, absorbSpeed*absorbRatio, 0);
         if(Nowgas < 0f){
@@ -44,7 +62,6 @@ public class bubbleController : BubbleBase{
 
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == "Player"){
-            Debug.Log("Collision");
             Transform child = transform.GetChild(0);
             child.GetComponent<BubbleTrigger>().getGas += Nowgas;
             Nowgas = 0;

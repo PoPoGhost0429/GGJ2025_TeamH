@@ -29,10 +29,11 @@ public class BubbleSystem : MonoBehaviour
         }
     }
 
-    public void generateBubble(float x, float y, float scale, float maxHeight){
+    public void generateBubble(string bubbleType, float x, float y, float scale, float maxHeight){
         GameObject bubble = Instantiate(bubblePrefab);
         bubble.transform.position = new Vector3(x, y, 0);
         bubble.transform.localScale = new Vector3(scale, scale, 0);
+        bubble.transform.GetChild(0).gameObject.GetComponent<bubbleController>().setBubbleType(bubbleType);
         bubble.transform.GetChild(0).gameObject.GetComponent<bubbleController>().maxHeight = maxHeight;
         /*
         var:
@@ -40,8 +41,9 @@ public class BubbleSystem : MonoBehaviour
         absorbRatio
 
         func:
-        absorption()
-        float bubble.getChild(0).getChild(0).getGasValue()
+        absorption();
+        float bubble.getChild(0).getChild(0).getGasValue();
+        string getBubbleType();
         */
         
     }
@@ -66,13 +68,14 @@ public class BubbleSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //generateBubble("Normal", UnityEngine.Random.Range(-7.0f, 8.0f), -3.7f, 1.0f, 50f);
+        //generateBubble("Rainbow", UnityEngine.Random.Range(-7.0f, 8.0f), -3.7f, 1.0f, 50f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // generateBubble(UnityEngine.Random.Range(-7.0f, 8.0f), -3.7f, 1.0f, 50f);
+        
         //generatePearl(UnityEngine.Random.Range(-7.0f, 8.0f), 5f, 0);
     }
 
