@@ -25,6 +25,8 @@ namespace UI
             {
                 InputSystem.Instance.OnPlayerConnectedEvent -= OnPlayerConnected;
             }
+            
+            InputSystem.Instance.PlayerControllers.ForEach(p => p.UnRegisterInteractEvent());
         }
 
         private void Start()

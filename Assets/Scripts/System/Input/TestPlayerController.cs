@@ -89,4 +89,9 @@ public class TestPlayerController : MonoBehaviour
             InputSystem.Instance.OnPlayerResume();
         }
     }
+
+    public void UnRegisterInteractEvent()
+    {
+        OnInteractEvent = null;
+    }
 }
