@@ -52,7 +52,7 @@ public class PlayerBase
 
     private bool isDispersion = false;
 
-    private float maxHeight = 17f;
+    private float maxHeight = 11.5f;
 
     public PlayerBase(int playerID, PlayerInitData data, RuntimeAnimatorController animatorController, Vector3 position)
     {
