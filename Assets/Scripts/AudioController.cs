@@ -20,6 +20,13 @@ public class AudioController : MonoBehaviour
             return instance;
         }
     }
+    private void Awake(){
+        if (instance != null && instance != this){
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+    }
 
     // Update is called once per frame
     public void PlaySound(int soundindex){
